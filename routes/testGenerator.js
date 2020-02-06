@@ -11,9 +11,9 @@ router.get('/', function(req, res, next) {
 
     for (let i = 1; i <(body.length); i++){
       if (i % 2 === 0){
-        let obj = {};
-        obj[body[i]] = i;
-        arr.push(obj);
+        // let obj = {};
+        // obj[body[i]] = i;
+        arr.push(parseInt(body[i]));
       }
     }
     return (arr)
