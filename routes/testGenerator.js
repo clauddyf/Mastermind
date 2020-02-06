@@ -3,7 +3,7 @@ const router = express.Router();
 const fetch = require('node-fetch')
 
 router.get('/', function(req, res, next) {
-  const url = 'https://www.random.org/integers/?num=10&min=1&max=6&col=1&base=10&format=json&rnd=new';
+  const url = 'https://www.random.org/integers/?num=10&min=1&max=6&col=1&base=10&format=plain&rnd=new';
   res.setHeader('content-type', 'application/json')
   fetch(url)
 //   res.send((JSON.stringify(fetch(url))))
