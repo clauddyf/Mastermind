@@ -11,8 +11,9 @@ class GamePlay extends React.Component {
             status: 'play',
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        let guess = playerInput.split('').map(e => parseInt(e))
     }
-
+    
     restGame() {
         if (this.state.status !== 'fail') {
             this.setState({
@@ -49,13 +50,31 @@ class GamePlay extends React.Component {
         }
     }
 
+    numExactNumbers(playerInput){
+        let guess = playerInput.split('').map(e => parseInt(e))
+        let count = 0;
+        for (let i = 0; i < guess.length; i++){
+            if (compNumArr.includes(guess[i])){
+                count += 1;
+            }
+        }
+        return count;
+    }
+
+    numNearMatches(playerInput){
+        let guess = playerInput.split('').map(e => parseInt(e))
+        
+    }
+
 
     handleSubmit(e) {
         e.preventDefault();
         const {compNumArr, playerInput} = this.state
         this.setState({try: this.state.try + 1})
-
-        if (this.state.)
+        let guess = playerInput.split('').map(e => parseInt(e))
+        for (let i = 0; i < compNumArr.length; i++){
+            if compNumArr[i] =
+        }
     }
 
     update() {
