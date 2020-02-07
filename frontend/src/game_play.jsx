@@ -15,9 +15,11 @@ class GamePlay extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.resetGame = this.resetGame.bind(this);
         this.getRandArr = this.getRandArr.bind(this);
+        this.update = this.update.bind(this);
         // this.numExactMatches = this.numExactMatches.bind(this)
         // this.onChange = this.onChange.bind(this);
         // let guess = playerInput.split('').map(e => parseInt(e))
+        debugger
     }
     
     resetGame() {
@@ -54,7 +56,8 @@ class GamePlay extends React.Component {
     }
 
     numExactMatches(playerInput){
-        debugger
+        // debugger
+        playerInput = this.state.playerInput;
         let guess = playerInput.split('').map(e => parseInt(e))
         let count = 0;
         for (let i = 0; i < guess.length; i++){
@@ -66,6 +69,7 @@ class GamePlay extends React.Component {
     }
 
     inRange(playerInput){
+        playerInput = this.state.playerInput;
         let guess = playerInput.split('').map(e => parseInt(e));
         let range = [1,2,3,4,5,6,7];
         return guess.every(e => range.includes(e))
@@ -101,14 +105,16 @@ class GamePlay extends React.Component {
             this.setState({
                 error: 'Value Must be between 0 and 7'
             });
+            return;
         }
     }
 
-    // update() {
-    //     return e => this.setState({
-    //         playerInput: e.currentTarget.value
-    //     });
-    // }
+    update() {
+        return e => this.setState({
+            playerInput: e.currentTarget.value
+        });
+    }
+    
 
     render() {
         if (this.state.status === 'win') {
@@ -139,7 +145,7 @@ class GamePlay extends React.Component {
                     Dont lose
                 </p>
                 <p></p>
-                <input type="text" placeholder='Four numbers. 0-7' />
+                <input type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')}/>
                 <button onClick={this.handleSubmit}>Check</button>
             </div>
         )
