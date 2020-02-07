@@ -138,33 +138,6 @@ class GamePlay extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         debugger
-        // const {compNumArr, playerInput} = this.state;
-        // let fT = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === true;
-        // let tF = this.inRange(this.guess())[0] === true && this.inRange(this.guess())[1] === false;
-        // let fF = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === false;
-
-        // let defState = (
-        //     this.setState({
-        //         try: this.state.try + 1,
-        //         error: null
-        //     })
-        // )
-        // if (this.numExactMatches(this.guess()) === compNumArr.length) {
-        //     this.setState({
-        //         status: 'win'
-        //     })
-        //     return;
-        // } else if (this.state.try === 10){
-        //     this.setState({
-        //         status:'fail'
-        //     })
-        // } else 
-        //     {
-        //     this.setState({
-        //         lastMove: `You had ${this.numExactMatches(e)} exact matches. You have ${9 - this.state.try} tries left`,
-        //         // pastGuesses: this.state.pastGuesses.push(playerInput)
-        //     })
-        // }
         this.matchesResponse()
         this.errorHandler()
     }
