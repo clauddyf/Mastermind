@@ -11,7 +11,7 @@ class GamePlay extends React.Component {
             status: 'play',
         }
         this.handleSubmit = this.handleSubmit.bind(this);
-        let guess = playerInput.split('').map(e => parseInt(e))
+        // let guess = playerInput.split('').map(e => parseInt(e))
     }
     
     restGame() {
@@ -26,8 +26,8 @@ class GamePlay extends React.Component {
         }
     }
     getRandArr() {
-      fetch('http://localhost:9000/testGenerator')
-        .then(res => {res.json()})
+      fetch('http://localhost:9000/randomGen')
+        .then(res => res)
         .then(data => this.setState({
             compNumArr: data,
             status:'play'
@@ -36,9 +36,6 @@ class GamePlay extends React.Component {
             this.setState({status: 'fail'})
         });
     }
-
-
-
 
     componentDidMount(){
         this.getRandArr();
@@ -50,20 +47,21 @@ class GamePlay extends React.Component {
         }
     }
 
-    numExactNumbers(playerInput){
+    numExactMatches(playerInput){
         let guess = playerInput.split('').map(e => parseInt(e))
         let count = 0;
         for (let i = 0; i < guess.length; i++){
-            if (compNumArr.includes(guess[i])){
+            if (compNumArr[i] === guess[i]){
                 count += 1;
             }
         }
         return count;
     }
 
-    numNearMatches(playerInput){
-        let guess = playerInput.split('').map(e => parseInt(e))
-        
+    inRange(playerInput){
+        let guess = playerInput.split('').map(e => parseInt(e));
+        let range = [1,2,3,4,5,6,7];
+        return guess.every(e => range.includes(e))
     }
 
 
@@ -72,8 +70,16 @@ class GamePlay extends React.Component {
         const {compNumArr, playerInput} = this.state
         this.setState({try: this.state.try + 1})
         let guess = playerInput.split('').map(e => parseInt(e))
-        for (let i = 0; i < compNumArr.length; i++){
-            if compNumArr[i] =
+        if (this.numExactMatches(e) === compNumArr.length) {
+            this.setState({
+                status: 'win'
+            })
+        }
+
+        if (this.inRange(e) === 'false') {
+            this.setState({
+                error: 'Value Must be between 0 and 7'
+            })
         }
     }
 
