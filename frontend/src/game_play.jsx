@@ -19,7 +19,7 @@ class GamePlay extends React.Component {
         this.update = this.update.bind(this);
         this.numExactMatches = this.numExactMatches.bind(this);
         this.guess = this.guess.bind(this);
-        debugger
+        // debugger
     }
     
     resetGame() {
@@ -97,15 +97,18 @@ class GamePlay extends React.Component {
         let fT = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === true;
         let tF = this.inRange(this.guess())[0] === true && this.inRange(this.guess())[1] === false;
         let fF = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === false;
-        let defState = (
+        debugger
+        // let defState = (
+        //     )
             this.setState({
                 try: this.state.try + 1,
                 error: null
             })
-        )
-        if (fT) {
+
+            if (fT) {
             this.setState({
                 error: 'Value Must be between 0 and 7',
+                try: this.state.try - 1
                 // pastGuesses: this.state.pastGuesses.push(playerInput)
             });
             return;
@@ -121,9 +124,10 @@ class GamePlay extends React.Component {
                 // pastGuesses: this.state.pastGuesses.push(playerInput)
             });
             return;
-        } else {
-            return defState
-        }
+        } 
+        // else {
+        //     return defState
+        // }
     }
 
     inRange(){
@@ -131,15 +135,21 @@ class GamePlay extends React.Component {
         let range = ['0','1','2','3','4','5','6','7'];
         arr.push(this.guess().every(e => range.includes(e)))
         arr.push(this.guess().length === 4)
-        debugger
+        // debugger
         return arr
     }
     
     handleSubmit(e) {
         e.preventDefault();
-        debugger
+        // debugger
         this.matchesResponse()
         this.errorHandler()
+        if (this.state.status !== 'play'){
+            let arr = this.state.pastGuesses;
+            debugger
+            arr.push(this.guess())
+            return arr
+        }
     }
 
     update() {
