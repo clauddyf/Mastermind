@@ -65,8 +65,8 @@ class GamePlay extends React.Component {
     numExactMatches(){
         // debugger
         let count = 0;
-        for (let i = 0; i < this.guess.length; i++){
-            if (this.state.compNumArr[i] === this.guess[i]){
+        for (let i = 0; i < this.guess().length; i++){
+            if (this.state.compNumArr[i] === this.guess()[i]){
                 count += 1;
             }
         }
@@ -75,20 +75,22 @@ class GamePlay extends React.Component {
 
     matchesResponse(){
         let compNumArr = this.state.compNumArr;
+        // debugger
         if (this.numExactMatches(this.guess()) === compNumArr.length) {
             this.setState({
                 status: 'win'
             })
             return;
-        } else if (this.state.try === 10){
+        } else if (this.state.try === 9){
             this.setState({
-                status:'fail'
+                status:'fail',
+                pastGuesses: this.guessArray()
             })
         } else 
             {
             this.setState({
                 lastMove: `You had ${this.numExactMatches()} exact matches. You have ${9 - this.state.try} tries left`,
-                // pastGuesses: this.state.pastGuesses.push(playerInput)
+                pastGuesses: this.guessArray()
             })
         }
     }
@@ -131,7 +133,15 @@ class GamePlay extends React.Component {
         let range = ['0','1','2','3','4','5','6','7'];
         arr.push(this.guess().every(e => range.includes(e)))
         arr.push(this.guess().length === 4)
+        // debugger
+        return arr
+    }
+
+    guessArray(){
         debugger
+        let arr = this.state.pastGuesses;
+        let playerInput = this.state.playerInput
+        arr.push(playerInput);
         return arr
     }
     
@@ -177,6 +187,9 @@ class GamePlay extends React.Component {
                 </p>
                 <p>{this.state.lastMove}</p>
                 <p>{this.state.error}</p>
+                <div>
+                    {this.state.pastGuesses}
+                </div>
                 <input type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')}/>
                 <button onClick={this.handleSubmit}>Check</button>
             </div>
