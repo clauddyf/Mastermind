@@ -87,13 +87,15 @@ class GamePlay extends React.Component {
         } else if (this.state.try === 9){
             this.setState({
                 status:'fail',
-                pastGuesses: this.guessArray()
+                pastGuesses: this.guessArray(),
+                playerInput:''
             })
         } else 
             {
             this.setState({
                 lastMove: `You had ${this.numExactMatches()} exact matches. You have ${9 - this.state.try} tries left`,
-                pastGuesses: this.guessArray()
+                pastGuesses: this.guessArray(),
+                playerInput:''
             })
         }
     }
@@ -175,36 +177,39 @@ class GamePlay extends React.Component {
     render() {
         if (this.state.status === 'win') {
             return (
-                <div>
-                    <h1>WINNER WINNER!</h1>
-                    <p>Computers Guess: {this.state.compNumArr}</p>
-                    <p>Number of tries: {this.state.try}</p>
-                    <button onClick={this.resetGame}> Play again</button>
+                <div className='winnerdiv'>
+                    <h1 className='headers'>WINNER WINNER!</h1>
+                    <div className='moveMessages'>Computers Guess: {this.state.compNumArr}</div>
+                    <div className='moveMessages'>Number of tries: {this.state.try}</div>
+                    <button className='checkButton' onClick={this.resetGame}> Play again</button>
                 </div>
             )
         } else if (this.state.status === 'fail'){
             return (
-                <div>
-                    <h1>BETTER LUCK NEXT TIME</h1>
-                    <button onClick={this.getRandArr}> Play again </button>
+                <div className='loserdiv'>
+                    <h1 className='headers' >BETTER LUCK NEXT TIME</h1>
+                    <button className='checkButton' onClick={this.getRandArr}> Play again </button>
                 </div>
             )
         } else {
         return (
-            <div>
-                <h1>Mastermind</h1>
-                <p>
-                    <b>Intruction</b>
+            <div className='papa-div'>
+                <h1 className='headers'>Mastermind</h1>
+                <p className='instructions'>
+                    <b>Intructions:</b>
                     <br/>
-                    Dont lose
+                    Feel like you're getting old? Test the strength of the old noggin with Mastermind!
+                    This is a game in which the user should guess a combination of 4 numbers, ranging from 0-7.
+                    This game will provide feedback when you get an exact number, and its position.
+
                 </p>
-                <p>{this.state.lastMove}</p>
-                <p>{this.state.error}</p>
+                <div className='moveMessages'>{this.state.lastMove}</div>
+                <div className='moveMessages'>{this.state.error}</div>
                 <div className='guesses'>
-                    {this.state.pastGuesses}
+                    {this.state.pastGuesses.map(guess => <li>{guess}</li>)}
                 </div>
-                <input type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')}/>
-                <button onClick={this.handleSubmit}>Check</button>
+                <input className='numInput'type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')}/>
+                <button className='checkButton'onClick={this.handleSubmit}>Check</button>
             </div>
         )}
     }       

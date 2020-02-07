@@ -1,0 +1,91 @@
+.main-footer-div{
+    justify-content: space-evenly;
+    align-items: flex-start;
+    background-color: #333333;
+    color: rgba(240,248,255,0.5);
+    width: 100%;
+    height: fit-content;
+    margin: none;
+    padding: 0 2rem;
+    padding-bottom: 3rem;
+    margin-top: 40px;
+    box-sizing: border-box;
+}
+.main-footer-div h1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 35px;
+    border-bottom: 1px solid rgba(240,248,255,0.5);
+}
+
+.footer-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.technology-row{
+    display: flex;
+    flex-direction: column;
+}
+
+.technology-row h3 {
+    padding: .45em 0;
+    border-bottom: 1px solid rgba(240,248,255,0.5);
+}
+.tech-list{
+    color: white;
+    padding: .45em 0;
+}
+
+.about-me{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.bio-div{
+    display: flex;
+    flex-direction: column;
+}
+.bio-div h2{
+    padding: .45em 0;
+    border-bottom: 1px solid rgba(240, 248, 255, 0.5);
+}
+.bio-div ul{
+    padding: .45em 0;
+}
+
+.bio-div p{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: baseline
+}
+.about-me h2 {
+    padding: .45em 0;
+    border-bottom: 1px solid rgba(240, 248, 255, 0.5);
+}
+
+.contact-me{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-me a {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-img{
+    height: 30px;
+    width: 30px;
+    padding: 10px;
+}

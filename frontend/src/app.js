@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Switch, withRouter } from 'react-router';
 import Play from './game_play'
+import footer from './footer'
+import Footer from './footer';
 
 const App = () => (
     <div className= 'app-container'>
@@ -9,6 +11,7 @@ const App = () => (
                 <Play {...props}/>
             )}/>
         </Switch>
+        <Footer/>
     </div>
 );
 
