@@ -9,12 +9,14 @@ class GamePlay extends React.Component {
             try: 0,
             error: null,
             status: 'play',
+            lastMove: 'Guess four numbers between 0 and 7',
+            pastGuesses = []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         // let guess = playerInput.split('').map(e => parseInt(e))
     }
     
-    restGame() {
+    resetGame() {
         if (this.state.status !== 'fail') {
             this.setState({
                 playerInput = '',
@@ -68,30 +70,69 @@ class GamePlay extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         const {compNumArr, playerInput} = this.state
-        this.setState({try: this.state.try + 1})
-        let guess = playerInput.split('').map(e => parseInt(e))
+        this.setState({
+            try: this.state.try + 1,
+            pastGuesses: this.state.pastGuesses.push(playerInput)
+        })
+        // let guess = playerInput.split('').map(e => parseInt(e))
         if (this.numExactMatches(e) === compNumArr.length) {
             this.setState({
                 status: 'win'
+            })
+            return;
+        } else {
+            this.setState({
+                lastMove: `You had ${this.numExactMatches(e)} exact matches. You have ${10 - this.state.try} tried left`
             })
         }
 
         if (this.inRange(e) === 'false') {
             this.setState({
                 error: 'Value Must be between 0 and 7'
-            })
+            });
         }
     }
 
-    update() {
-        return e => this.setState({
-            playerInput: e.currentTarget.value
-        });
-    }
+    // update() {
+    //     return e => this.setState({
+    //         playerInput: e.currentTarget.value
+    //     });
+    // }
 
     render() {
-        return (
+        if (this.state.status = 'win') {
+            return (
+                <div>
+                    <h1>WINNER WINNER!</h1>
+                    <p>Computers Guess: {this.state.compNumArr}</p>
+                    <p>Number of tries: {this.state.try}</p>
+                    <button onClick={this.resetGame}> Play again</button>
+                </div>
+            )
+        }
 
+        if (this.state.status = 'fail'){
+            return (
+                <div>
+                    <h1>BETTER LUCK NEXT TIME</h1>
+                    <button onClick={this.getRandArr}> Play again </button>
+                </div>
+            )
+        }
+        return (
+            <div>
+                <h1>Mastermind</h1>
+                <p>
+                    <b>Intruction</b>
+                    <br/>
+                    Done lose
+                </p>
+                <p></p>
+                <input type="text" placeholder='Four numbers. 0-7'/>
+                <button onClick={this.handleSubmit}>Check</button>
+            </div>
         )
-    }
+    }       
 }
+
+export default GamePlay
