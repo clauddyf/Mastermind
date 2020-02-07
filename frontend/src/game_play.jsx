@@ -60,7 +60,7 @@ class GamePlay extends React.Component {
     numExactMatches(playerInput){
         // debugger
         playerInput = this.state.playerInput;
-        let guess = playerInput.split('').map(e => parseInt(e))
+        let guess = playerInput.split('')
         let count = 0;
         for (let i = 0; i < guess.length; i++){
             if (this.state.compNumArr[i] === guess[i]){
@@ -73,8 +73,8 @@ class GamePlay extends React.Component {
     inRange(playerInput){
         let arr = [];
         playerInput = this.state.playerInput;
-        let guess = playerInput.split('').map(e => parseInt(e));
-        let range = [0,1,2,3,4,5,6,7];
+        let guess = playerInput.split('');
+        let range = ['0','1','2','3','4','5','6','7'];
         arr.push(guess.every(e => range.includes(e)))
         arr.push(guess.length === 4)
         debugger
