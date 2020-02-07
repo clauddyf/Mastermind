@@ -3,7 +3,7 @@ const router = express.Router();
 const fetch = require('node-fetch')
 
 router.get('/', function(req, res, next) {
-  const url = 'https://www.random.org/integers/?num=11&min=0&max=7&col=1&base=10&format=plain&rnd=new';
+  const url = 'https://www.random.org/integers/?num=5&min=0&max=7&col=1&base=10&format=plain&rnd=new';
   fetch(url)
   .then(res => res.text()) // the api response
   .then(body => {
