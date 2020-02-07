@@ -43,17 +43,14 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname+'/frontend/public/index.html'));
+});
 
+const port = process.env.PORT || 9000;
+app.listen(port)
 
-  // app.post('/testGenerator',(request,response) => {
-  //   fetch(
-  //     'https://www.random.integers/?num=10&min=1&max=6&col=1&base=10&format=plain&rnd=new'
-  //   ).then(response => {
-  //     return response.text();
-  //   }).then(body => {
-  //     let results =  JSON.parse(body);
-  //     response.send(results);
-  //   })
-  // })
+console.log('App is listening on port' + port);
+
 
 module.exports = app;
