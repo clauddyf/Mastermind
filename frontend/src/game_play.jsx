@@ -1,4 +1,5 @@
 import React from 'react';
+// import inRange from './inRange';
 
 class GamePlay extends React.Component {
     constructor(props) {
@@ -16,7 +17,8 @@ class GamePlay extends React.Component {
         this.resetGame = this.resetGame.bind(this);
         this.getRandArr = this.getRandArr.bind(this);
         this.update = this.update.bind(this);
-        this.numExactMatches = this.numExactMatches.bind(this)
+        this.numExactMatches = this.numExactMatches.bind(this);
+        this.guess = this.guess.bind(this);
         debugger
     }
     
@@ -56,39 +58,24 @@ class GamePlay extends React.Component {
             this.getRandArr();
         }
     }
+    guess(){
+        return this.state.playerInput.split('')
+    }
 
-    numExactMatches(playerInput){
+    numExactMatches(){
         // debugger
-        playerInput = this.state.playerInput;
-        let guess = playerInput.split('')
         let count = 0;
-        for (let i = 0; i < guess.length; i++){
-            if (this.state.compNumArr[i] === guess[i]){
+        for (let i = 0; i < this.guess.length; i++){
+            if (this.state.compNumArr[i] === this.guess[i]){
                 count += 1;
             }
         }
         return count;
     }
 
-    inRange(playerInput){
-        let arr = [];
-        playerInput = this.state.playerInput;
-        let guess = playerInput.split('');
-        let range = ['0','1','2','3','4','5','6','7'];
-        arr.push(guess.every(e => range.includes(e)))
-        arr.push(guess.length === 4)
-        debugger
-        return arr
-    }
-
-    handleSubmit(e) {
-        e.preventDefault();
-        // debugger
-        const {compNumArr, playerInput} = this.state;
-        this.setState({
-            try: this.state.try + 1,
-        })
-        if (this.numExactMatches(playerInput) === compNumArr.length) {
+    matchesResponse(){
+        let compNumArr = this.state.compNumArr;
+        if (this.numExactMatches(this.guess()) === compNumArr.length) {
             this.setState({
                 status: 'win'
             })
@@ -100,30 +87,86 @@ class GamePlay extends React.Component {
         } else 
             {
             this.setState({
-                lastMove: `You had ${this.numExactMatches(e)} exact matches. You have ${9 - this.state.try} tries left`,
+                lastMove: `You had ${this.numExactMatches()} exact matches. You have ${9 - this.state.try} tries left`,
                 // pastGuesses: this.state.pastGuesses.push(playerInput)
             })
         }
-        debugger
-        if ((this.inRange(playerInput)[0] === false && this.inRange(playerInput)[1] === true )) {
+    }
+
+    errorHandler(){
+        let fT = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === true;
+        let tF = this.inRange(this.guess())[0] === true && this.inRange(this.guess())[1] === false;
+        let fF = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === false;
+        let defState = (
+            this.setState({
+                try: this.state.try + 1,
+                error: null
+            })
+        )
+        if (fT) {
             this.setState({
                 error: 'Value Must be between 0 and 7',
                 // pastGuesses: this.state.pastGuesses.push(playerInput)
             });
             return;
-        } else if (this.inRange(playerInput)[0] === true && this.inRange(playerInput)[1] === false){
+        } else if (tF){
             this.setState({
                 error: 'Whoaa there speedracer! Just four integers',
                 // pastGuesses: this.state.pastGuesses.push(playerInput)
             });
             return;
-        } else if (this.inRange(playerInput)[0] === false && this.inRange(playerInput)[1] === false){
+        } else if (fF){
             this.setState({
                 error: 'The instructions should be displayed above. Sorry for the incovienence, please enter four numbers between 0 and 7.',
                 // pastGuesses: this.state.pastGuesses.push(playerInput)
             });
             return;
+        } else {
+            return defState
         }
+    }
+
+    inRange(){
+        let arr = [];
+        let range = ['0','1','2','3','4','5','6','7'];
+        arr.push(this.guess().every(e => range.includes(e)))
+        arr.push(this.guess().length === 4)
+        debugger
+        return arr
+    }
+    
+    handleSubmit(e) {
+        e.preventDefault();
+        debugger
+        // const {compNumArr, playerInput} = this.state;
+        // let fT = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === true;
+        // let tF = this.inRange(this.guess())[0] === true && this.inRange(this.guess())[1] === false;
+        // let fF = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === false;
+
+        // let defState = (
+        //     this.setState({
+        //         try: this.state.try + 1,
+        //         error: null
+        //     })
+        // )
+        // if (this.numExactMatches(this.guess()) === compNumArr.length) {
+        //     this.setState({
+        //         status: 'win'
+        //     })
+        //     return;
+        // } else if (this.state.try === 10){
+        //     this.setState({
+        //         status:'fail'
+        //     })
+        // } else 
+        //     {
+        //     this.setState({
+        //         lastMove: `You had ${this.numExactMatches(e)} exact matches. You have ${9 - this.state.try} tries left`,
+        //         // pastGuesses: this.state.pastGuesses.push(playerInput)
+        //     })
+        // }
+        this.matchesResponse()
+        this.errorHandler()
     }
 
     update() {

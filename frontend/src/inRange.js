@@ -1,6 +1,10 @@
 import React from 'react'
 
 class inRange extends React.Component {
+    constructor(props){
+        super(props);
+        this.fT = this.fT.bind(this);
+    }
     inArr(playerInput){
         let arr = [];
         playerInput = this.state.playerInput;
@@ -11,8 +15,9 @@ class inRange extends React.Component {
         debugger
         return arr
     }
-
+    
     fT(playerInput){
+        debugger
         this.inRange(playerInput)[0] === false && this.inRange(playerInput)[1] === true 
     }
 
