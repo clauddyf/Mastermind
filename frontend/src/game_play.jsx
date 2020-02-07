@@ -35,8 +35,9 @@ class GamePlay extends React.Component {
     }
     getRandArr() {
       fetch('http://localhost:9000/randomGen')
-        .then(res => res)
+        .then(res => res.json())
         .then(data => this.setState({
+            
             compNumArr: data,
             status:'play'
         }))
@@ -84,10 +85,11 @@ class GamePlay extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const {compNumArr, playerInput} = this.state
+        const {compNumArr, playerInput} = this.state;
+        //check if player input is valid here
+        debugger
         this.setState({
             try: this.state.try + 1,
-            pastGuesses: this.state.pastGuesses.push(playerInput)
         })
         // let guess = playerInput.split('').map(e => parseInt(e))
         if (this.numExactMatches(e) === compNumArr.length) {
@@ -97,13 +99,15 @@ class GamePlay extends React.Component {
             return;
         } else {
             this.setState({
-                lastMove: `You had ${this.numExactMatches(e)} exact matches. You have ${10 - this.state.try} tried left`
+                lastMove: `You had ${this.numExactMatches(e)} exact matches. You have ${10 - this.state.try} tried left`,
+                // pastGuesses: this.state.pastGuesses.push(playerInput)
             })
         }
 
         if (this.inRange(e) === 'false') {
             this.setState({
-                error: 'Value Must be between 0 and 7'
+                error: 'Value Must be between 0 and 7',
+                // pastGuesses: this.state.pastGuesses.push(playerInput)
             });
             return;
         }
