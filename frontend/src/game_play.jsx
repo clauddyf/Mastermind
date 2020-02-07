@@ -190,7 +190,7 @@ class GamePlay extends React.Component {
                 </p>
                 <p>{this.state.lastMove}</p>
                 <p>{this.state.error}</p>
-                <div>
+                <div className='guesses'>
                     {this.state.pastGuesses}
                 </div>
                 <input type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')}/>
