@@ -29,7 +29,8 @@ class GamePlay extends React.Component {
                 try: 0,
                 error: null,
                 compNumArr: null,
-                status: 'play'
+                status: 'play',
+                pastGuesses: []
             })
         }
     }
@@ -42,7 +43,9 @@ class GamePlay extends React.Component {
             status:'play',
             try: 0,
             lastMove: 'Guess four numbers between 0 and 7',
-            error:null
+            error:null,
+            pastGuesses: []
+
         }))
         .catch(err => {
             this.setState({status: 'fail'})
