@@ -16,7 +16,7 @@ class GamePlay extends React.Component {
         this.resetGame = this.resetGame.bind(this);
         this.getRandArr = this.getRandArr.bind(this);
         this.update = this.update.bind(this);
-        // this.numExactMatches = this.numExactMatches.bind(this)
+        this.numExactMatches = this.numExactMatches.bind(this)
         // this.onChange = this.onChange.bind(this);
         // let guess = playerInput.split('').map(e => parseInt(e))
         debugger
@@ -70,6 +70,7 @@ class GamePlay extends React.Component {
     }
 
     inRange(playerInput){
+        debugger
         playerInput = this.state.playerInput;
         let guess = playerInput.split('').map(e => parseInt(e));
         let range = [1,2,3,4,5,6,7];
@@ -85,26 +86,31 @@ class GamePlay extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        debugger
         const {compNumArr, playerInput} = this.state;
         //check if player input is valid here
-        debugger
         this.setState({
             try: this.state.try + 1,
         })
         // let guess = playerInput.split('').map(e => parseInt(e))
-        if (this.numExactMatches(e) === compNumArr.length) {
+        if (this.numExactMatches(playerInput) === compNumArr.length) {
             this.setState({
                 status: 'win'
             })
             return;
-        } else {
+        } else if (this.state.try === 10){
+            this.setState({
+                status:'fail'
+            })
+        } else 
+            {
             this.setState({
                 lastMove: `You had ${this.numExactMatches(e)} exact matches. You have ${10 - this.state.try} tried left`,
                 // pastGuesses: this.state.pastGuesses.push(playerInput)
             })
         }
 
-        if (this.inRange(e) === 'false') {
+        if (this.inRange(playerInput) === false) {
             this.setState({
                 error: 'Value Must be between 0 and 7',
                 // pastGuesses: this.state.pastGuesses.push(playerInput)
@@ -130,16 +136,14 @@ class GamePlay extends React.Component {
                     <button onClick={this.resetGame}> Play again</button>
                 </div>
             )
-        }
-
-        if (this.state.status === 'fail'){
+        } else if (this.state.status === 'fail'){
             return (
                 <div>
                     <h1>BETTER LUCK NEXT TIME</h1>
                     <button onClick={this.getRandArr}> Play again </button>
                 </div>
             )
-        }
+        } else {
         return (
             <div>
                 <h1>Mastermind</h1>
@@ -148,11 +152,12 @@ class GamePlay extends React.Component {
                     <br/>
                     Dont lose
                 </p>
-                <p></p>
+                <p>{this.state.lastMove}</p>
+                <p>{this.state.error}</p>
                 <input type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')}/>
                 <button onClick={this.handleSubmit}>Check</button>
             </div>
-        )
+        )}
     }       
 }
 
