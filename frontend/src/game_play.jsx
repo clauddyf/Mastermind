@@ -105,36 +105,30 @@ class GamePlay extends React.Component {
         let tF = this.inRange(this.guess())[0] === true && this.inRange(this.guess())[1] === false;
         let fF = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === false;
         debugger
-        // let defState = (
-        //     )
-            this.setState({
-                try: this.state.try + 1,
-                error: null
-            })
-
             if (fT) {
             this.setState({
                 error: 'Error: Value Must be between 0 and 7',
-                try: this.state.try - 1
-                // pastGuesses: this.state.pastGuesses.push(playerInput)
+                try: this.state.try
             });
             return;
         } else if (tF){
             this.setState({
-                error: 'Error: Whoaa there speedracer! Just four integers',
-                // pastGuesses: this.state.pastGuesses.push(playerInput)
+                error: 'Error: Whoaa there speedracer! Enter Four integers',
+                try: this.state.try 
             });
             return;
         } else if (fF){
             this.setState({
                 error: 'Error: The instructions should be displayed above. Sorry for the incovienence, please enter four numbers between 0 and 7.',
-                // pastGuesses: this.state.pastGuesses.push(playerInput)
+                try: this.state.try
             });
             return;
-        } 
-        // else {
-        //     return defState
-        // }
+        } else {
+            this.setState({
+                try: this.state.try + 1,
+                error: null
+            })
+        }
     }
 
     inRange(){
@@ -227,8 +221,10 @@ class GamePlay extends React.Component {
                     </div>
                     <div className='playerGuess'>
                     <div className='lastMove'>{this.state.lastMove}</div>
+                    <form action="" className='inputsnum'>
                         <input className='numInput'type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')}/>
                         <button className='checkButton'onClick={this.handleSubmit}>Check</button>
+                    </form>
                     </div>
                 </div>
             </div>

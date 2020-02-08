@@ -1,0 +1,41 @@
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 18px;
+    padding-right: 50px;
+    padding-bottom: 8px;
+   align-items: center;
+   height: 50px;
+ }
+
+ .header-link{
+  font-family: 'Playfair Display', serif;
+   position: relative;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   flex-direction: row;
+   align-items: center;
+}
+.logo-img{
+  border: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 0px;
+  height: 50px;
+  font-size: 25px;
+}
+
+.logo-img img {
+  height: 43px;
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-left: 4px;
+}
+.logo-name{
+  border:0px;
+  font-size: 25px;
+  color: white;
+}
