@@ -7,9 +7,9 @@ const greeting = () => (
         <div className='logo-img'>
             <img src="/linkedin.png" alt=""/>
         </div>
-            <div className='logo-name'>
-                Mastermind
-            </div>
+        <div className='logo-name'>
+            Mastermind
+        </div>
     </div>
 );
 

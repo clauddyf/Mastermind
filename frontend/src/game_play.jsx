@@ -11,7 +11,8 @@ class GamePlay extends React.Component {
             error: null,
             status: 'play',
             lastMove: 'Guess four numbers between 0 and 7',
-            pastGuesses: []
+            pastGuesses: [],
+            score: 0
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.resetGame = this.resetGame.bind(this);
@@ -19,10 +20,12 @@ class GamePlay extends React.Component {
         this.update = this.update.bind(this);
         this.numExactMatches = this.numExactMatches.bind(this);
         this.guess = this.guess.bind(this);
-        // debugger
+        this.scoreKeep = this.scoreKeep.bind(this)
+        debugger
     }
     
     resetGame() {
+        debugger
         if (this.state.status !== 'fail') {
             this.setState({
                 playerInput: '',
@@ -30,10 +33,28 @@ class GamePlay extends React.Component {
                 error: null,
                 compNumArr: null,
                 status: 'play',
-                pastGuesses: []
+                pastGuesses: [],
+                score: this.state.score + this.scoreKeep()
+            })
+        }
+        if (this.state.status === 'fail') {
+            this.setState({
+                playerInput: '',
+                try: 0,
+                error: null,
+                compNumArr: null,
+                status: 'play',
+                pastGuesses: [],
+                score: 0
             })
         }
     }
+
+    scoreKeep(){
+        return 10 - this.state.try
+    }
+
+
     getRandArr() {
       fetch('http://localhost:9000/randomGen')
         .then(res => res.json())
@@ -44,7 +65,8 @@ class GamePlay extends React.Component {
             try: 0,
             lastMove: 'Guess four numbers between 0 and 7',
             error:null,
-            pastGuesses: []
+            pastGuesses: [], 
+            // score: this.state.score
 
         }))
         .catch(err => {
@@ -177,7 +199,7 @@ class GamePlay extends React.Component {
                     <div className='moveMessages'>Your Guess: {this.state.compNumArr}</div>
                     <div className='moveMessages'>Number of tries: {this.state.try}</div>
                     <div className='againButton'>
-                        <button className='checkButton' onClick={this.resetGame}> Play again</button>
+                        <button className='checkButton' onClick={this.resetGame}>Play again</button>
                     </div>
                 </div>
             )
@@ -194,7 +216,7 @@ class GamePlay extends React.Component {
                         </span>
                     </div>
                     <div className='againButton'>
-                        <button className='playAgain' onClick={this.getRandArr}> Play again </button>
+                        <button className='playAgain' onClick={this.resetGame}> Play again </button>
                     </div>
                 </div>
             )
@@ -230,6 +252,9 @@ class GamePlay extends React.Component {
                             <div className='guesses'>
                                 <h1>List of Guesses:</h1>
                                 {this.state.pastGuesses.map(guess => <li className='listGuesses'>{guess}</li>)}
+                            </div>
+                            <div>
+                                Score: {this.state.score}
                             </div>
                     </div>
                     <div className='playerGuess'>
