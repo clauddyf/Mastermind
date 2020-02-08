@@ -15,4 +15,80 @@
   border: 1px solid rgba(232,232,255,0.9);
   border-radius: 9px;
 }
+ .nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 18px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 8px;
+   align-items: center;
+   width: 100%;
+   height: 50px;
+ }
+
+ .header-link{
+  font-family: 'Playfair Display', serif;
+  margin-left: 50px;
+   position: relative;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   flex-direction: row;
+   align-items: center;
+}
+.logo-img{
+  border: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 0px;
+  height: 50px;
+  font-size: 25px;
+}
+
+.logo-img img {
+  height: 77px;
+  margin-right: 5px;
+  margin-top: 7px;
+  margin-right: 5px;
+}
+.logo-name{
+  border:0px;
+  font-size: 25px;
+  color: white;
+}
+
+.app-container{
+  background-color: #0e76a8;
+}
+.instructions{
+  color:white;
+}
+
+.papa-div{
+
+}
+.winner-div{
+
+}
+.headers{
+  color: white;
+}
+.moveMessages{
+  color: white;
+}
+
+.loserdiv{
+
+}
+
+.numInput{
+
+}
+
+.listGuesses{
+  color:red;
+}
 
