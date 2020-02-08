@@ -174,6 +174,7 @@ class GamePlay extends React.Component {
                 <div className='winnerdiv'>
                     <h1 className='headers'>WINNER WINNER!</h1>
                     <div className='moveMessages'>Computers Guess: {this.state.compNumArr}</div>
+                    <div className='moveMessages'>Your Guess: {this.state.compNumArr}</div>
                     <div className='moveMessages'>Number of tries: {this.state.try}</div>
                     <div className='againButton'>
                         <button className='checkButton' onClick={this.resetGame}> Play again</button>
@@ -189,7 +190,7 @@ class GamePlay extends React.Component {
                             Your memory isn't quite there.
                         </span>
                         <span>
-                            The combination was {this.state.compNumArr}
+                            The correct combination was {this.state.compNumArr}
                         </span>
                     </div>
                     <div className='againButton'>
@@ -221,12 +222,13 @@ class GamePlay extends React.Component {
                 <div className='lilpapi-div'>
                     <div className='rightSide'>
                             <div className='stickyResults'>
-                                <div className='moveMessages'>{this.state.error}</div>
+                                <div className='errorMessages'>{this.state.error}</div>
                             </div>
                             {/* <Bubbles
                                 guesses = {this.state.pastGuesses}
                             /> */}
                             <div className='guesses'>
+                                <h1>List of Guesses:</h1>
                                 {this.state.pastGuesses.map(guess => <li className='listGuesses'>{guess}</li>)}
                             </div>
                     </div>
