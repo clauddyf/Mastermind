@@ -56,7 +56,15 @@
   height: 385px;
   display: flex;
   flex-direction: column;
+}
 
+.loserMessage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Russo One', sans-serif;
 }
 
 .numInput{

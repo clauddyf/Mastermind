@@ -1,6 +1,6 @@
 import React from 'react';
 // import inRange from './inRange';
-
+import Bubbles from './bubbles'
 class GamePlay extends React.Component {
     constructor(props) {
         super(props);
@@ -184,6 +184,14 @@ class GamePlay extends React.Component {
             return (
                 <div className='loserdiv'>
                     <h1 className='headers' >BETTER LUCK NEXT TIME</h1>
+                    <div className='loserMessage'>
+                        <span>
+                            Your memory isn't quite there.
+                        </span>
+                        <span>
+                            The combination was {this.state.compNumArr}
+                        </span>
+                    </div>
                     <div className='againButton'>
                         <button className='playAgain' onClick={this.getRandArr}> Play again </button>
                     </div>
@@ -212,9 +220,12 @@ class GamePlay extends React.Component {
                 </div>
                 <div className='lilpapi-div'>
                     <div className='rightSide'>
-                        <div className='stickyResults'>
-                            <div className='moveMessages'>{this.state.error}</div>
-                        </div>
+                            <div className='stickyResults'>
+                                <div className='moveMessages'>{this.state.error}</div>
+                            </div>
+                            {/* <Bubbles
+                                guesses = {this.state.pastGuesses}
+                            /> */}
                             <div className='guesses'>
                                 {this.state.pastGuesses.map(guess => <li className='listGuesses'>{guess}</li>)}
                             </div>
