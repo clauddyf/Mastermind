@@ -194,22 +194,33 @@ class GamePlay extends React.Component {
         } else {
         return (
             <div className='papa-div'>
-                <h1 className='headers'>Mastermind</h1>
-                <p className='instructions'>
-                    <b>Intructions:</b>
-                    <br/>
-                    Feel like you're getting old? Test the strength of the old noggin with Mastermind!
-                    This is a game in which the user should guess a combination of 4 numbers, ranging from 0-7.
-                    This game will provide feedback when you get an exact number, and its position.
-
-                </p>
-                <div className='moveMessages'>{this.state.lastMove}</div>
+                <div className='backgroundImg'>
+                    <div className='instructions'>
+                    <h1 className='headers'>Mastermind</h1>
+                        <div>Intructions:</div>
+                        <br/>
+                        <div>
+                            <div>
+                                Feel like you're getting old? Test the strength of the old noggin with Mastermind!
+                            </div>
+                            <div>
+                                This is a game in which the user should guess a combination of 4 numbers, ranging from 0-7.
+                            </div>
+                            <div>
+                                This game will provide feedback when you get an exact number, and its position.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='lastMove'>{this.state.lastMove}</div>
                 <div className='moveMessages'>{this.state.error}</div>
                 <div className='guesses'>
                     {this.state.pastGuesses.map(guess => <li className='listGuesses'>{guess}</li>)}
                 </div>
-                <input className='numInput'type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')}/>
-                <button className='checkButton'onClick={this.handleSubmit}>Check</button>
+                <div className='playerGuess'>
+                    <input className='numInput'type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')}/>
+                    <button className='checkButton'onClick={this.handleSubmit}>Check</button>
+                </div>
             </div>
         )}
     }       

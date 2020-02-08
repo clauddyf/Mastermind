@@ -20,17 +20,14 @@
     flex-direction: row;
     justify-content: space-between;
     font-size: 18px;
-    padding-left: 50px;
     padding-right: 50px;
     padding-bottom: 8px;
    align-items: center;
-   width: 100%;
    height: 50px;
  }
 
  .header-link{
   font-family: 'Playfair Display', serif;
-  margin-left: 50px;
    position: relative;
    height: 100%;
    display: flex;
@@ -49,10 +46,10 @@
 }
 
 .logo-img img {
-  height: 77px;
+  height: 43px;
   margin-right: 5px;
-  margin-top: 7px;
-  margin-right: 5px;
+  margin-top: 5px;
+  margin-left: 4px;
 }
 .logo-name{
   border:0px;
@@ -65,19 +62,34 @@
 }
 .instructions{
   color:white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .papa-div{
-
+  height:706px;
 }
 .winner-div{
 
 }
 .headers{
   color: white;
+  display: flex;
+  justify-content: center;
 }
 .moveMessages{
   color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+.lastMove{
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  padding-top: 65px;
 }
 
 .loserdiv{
@@ -90,5 +102,23 @@
 
 .listGuesses{
   color:red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.playerGuess{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.backgroundImg{
+  background-color: grey;
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(/holding_lights.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
