@@ -138,3 +138,26 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.stickyResults{
+
+}
+
+.lilpapi-div{
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  flex-direction: row-reverse;
+  max-width: 992px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 87px;
+}
+.rightSide{
+  width: 320px;
+  margin: 0 0 0 7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; display: block;
+}

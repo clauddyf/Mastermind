@@ -212,14 +212,20 @@ class GamePlay extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className='moveMessages'>{this.state.error}</div>
-                <div className='guesses'>
-                    {this.state.pastGuesses.map(guess => <li className='listGuesses'>{guess}</li>)}
-                </div>
-                <div className='playerGuess'>
-                  <div className='lastMove'>{this.state.lastMove}</div>
-                    <input className='numInput'type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')}/>
-                    <button className='checkButton'onClick={this.handleSubmit}>Check</button>
+                <div className='lilpapi-div'>
+                    <div className='rightSide'>
+                        <div className='stickyResults'>
+                            <div className='moveMessages'>{this.state.error}</div>
+                            <div className='guesses'>
+                    </div>
+                        </div>
+                        {this.state.pastGuesses.map(guess => <li className='listGuesses'>{guess}</li>)}
+                    </div>
+                    <div className='playerGuess'>
+                    <div className='lastMove'>{this.state.lastMove}</div>
+                        <input className='numInput'type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')}/>
+                        <button className='checkButton'onClick={this.handleSubmit}>Check</button>
+                    </div>
                 </div>
             </div>
         )}
