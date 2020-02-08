@@ -29,9 +29,11 @@ const Footer = () => (
                 <div>
                     Born and raised in Silver Spring, MD. 
                 </div> 
+                <br/>
                 <div>
                     Currently residing in San Francisco.
                 </div>
+                <br/>
                 <div>
                     Software Engineer App Academy.
                 </div>
