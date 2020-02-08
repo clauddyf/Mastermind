@@ -114,20 +114,20 @@ class GamePlay extends React.Component {
 
             if (fT) {
             this.setState({
-                error: 'Value Must be between 0 and 7',
+                error: 'Error: Value Must be between 0 and 7',
                 try: this.state.try - 1
                 // pastGuesses: this.state.pastGuesses.push(playerInput)
             });
             return;
         } else if (tF){
             this.setState({
-                error: 'Whoaa there speedracer! Just four integers',
+                error: 'Error: Whoaa there speedracer! Just four integers',
                 // pastGuesses: this.state.pastGuesses.push(playerInput)
             });
             return;
         } else if (fF){
             this.setState({
-                error: 'The instructions should be displayed above. Sorry for the incovienence, please enter four numbers between 0 and 7.',
+                error: 'Error: The instructions should be displayed above. Sorry for the incovienence, please enter four numbers between 0 and 7.',
                 // pastGuesses: this.state.pastGuesses.push(playerInput)
             });
             return;
@@ -181,14 +181,18 @@ class GamePlay extends React.Component {
                     <h1 className='headers'>WINNER WINNER!</h1>
                     <div className='moveMessages'>Computers Guess: {this.state.compNumArr}</div>
                     <div className='moveMessages'>Number of tries: {this.state.try}</div>
-                    <button className='checkButton' onClick={this.resetGame}> Play again</button>
+                    <div className='againButton'>
+                        <button className='checkButton' onClick={this.resetGame}> Play again</button>
+                    </div>
                 </div>
             )
         } else if (this.state.status === 'fail'){
             return (
                 <div className='loserdiv'>
                     <h1 className='headers' >BETTER LUCK NEXT TIME</h1>
-                    <button className='checkButton' onClick={this.getRandArr}> Play again </button>
+                    <div className='againButton'>
+                        <button className='playAgain' onClick={this.getRandArr}> Play again </button>
+                    </div>
                 </div>
             )
         } else {
@@ -216,10 +220,10 @@ class GamePlay extends React.Component {
                     <div className='rightSide'>
                         <div className='stickyResults'>
                             <div className='moveMessages'>{this.state.error}</div>
-                            <div className='guesses'>
-                    </div>
                         </div>
-                        {this.state.pastGuesses.map(guess => <li className='listGuesses'>{guess}</li>)}
+                            <div className='guesses'>
+                                {this.state.pastGuesses.map(guess => <li className='listGuesses'>{guess}</li>)}
+                            </div>
                     </div>
                     <div className='playerGuess'>
                     <div className='lastMove'>{this.state.lastMove}</div>

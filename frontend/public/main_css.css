@@ -86,10 +86,12 @@
   justify-content: center;
 }
 .moveMessages{
-  color: white;
+  color:red;
   display: flex;
   flex-direction: column;
   align-items: center; 
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Russo One', sans-serif;
 }
 .lastMove{
   color: white;
@@ -101,6 +103,9 @@
 
 .loserdiv{
   height: 385px;
+  display: flex;
+  flex-direction: column;
+
 }
 
 .numInput{
@@ -110,10 +115,12 @@
 }
 
 .listGuesses{
-  color:red;
+  color:white;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Russo One', sans-serif;
 }
 
 .playerGuess{
@@ -140,7 +147,38 @@
 }
 
 .stickyResults{
+  position: sticky;
+  top: 0%;
+  border-radius: 3px;
+  box-sizing: border-box;
+  margin: 1px;
+  padding: 1.0rem 1.0rem;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  background-color: white;
+  margin-bottom: 67px;
+}
 
+.playAgain{
+  padding: 0px 15px;
+    height: 40px;
+    background-color: black;
+    border: 0px;
+    color: white;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Russo One', sans-serif;
+    cursor: pointer;
+}
+
+.againButton{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.winnerdiv{
+  display: flex;
+  flex-direction: column
 }
 
 .lilpapi-div{
@@ -160,4 +198,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center; display: block;
+  border: 1px solid white;
+  border-radius: 8px;
+  margin-top: 50px;
+  margin-bottom: 15px;
 }
