@@ -7,13 +7,15 @@
 }
 
 .checkButton{
-  margin-left: 2px;
-  height: 34px;
+  padding: 0px 15px;
+  height: 40px;
+  background-color: black;
+  border: 0px;
+  color: white;
   font-weight: 400;
-  font-family: helvetica;
-  padding-left: 15px;
-  border: 1px solid rgba(232,232,255,0.9);
-  border-radius: 9px;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Russo One', sans-serif;
+  cursor: pointer;
 }
  .nav-bar {
     display: flex;
@@ -70,6 +72,9 @@
 }
 
 .papa-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height:706px;
 }
 .winner-div{
@@ -95,11 +100,13 @@
 }
 
 .loserdiv{
-
+  height: 385px;
 }
 
 .numInput{
-
+  border: 12px;
+  border-radius: 15px;
+  height: 30px;
 }
 
 .listGuesses{
@@ -112,7 +119,14 @@
 .playerGuess{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center;margin-bottom: 15px;
+  border: 1px solid white;
+  padding: 25px;
+  border-radius: 8px;
+  width: 500px;
+  margin-top: 50px;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Russo One', sans-serif;
 }
 
 .backgroundImg{
