@@ -1,6 +1,9 @@
 import React from 'react';
 // import inRange from './inRange';
-import Bubbles from './bubbles'
+import Bubbles from './bubbles';
+import Greeting from './greeting';
+
+
 class GamePlay extends React.Component {
     constructor(props) {
         super(props);
@@ -51,7 +54,7 @@ class GamePlay extends React.Component {
     }
 
     scoreKeep(){
-        return 10 - this.state.try
+        return (10 - this.state.try) * 10
     }
 
 
@@ -223,6 +226,9 @@ class GamePlay extends React.Component {
         } else {
         return (
             <div className='papa-div'>
+                <Greeting 
+                    score= {this.state.score}
+                />
                 <div className='backgroundImg'>
                     <div className='instructions'>
                     <h1 className='headers'>Mastermind</h1>
