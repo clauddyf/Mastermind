@@ -11,7 +11,7 @@ const greeting = (props) => (
             Mastermind
         </div>
         <div>
-            Score: {props.score}
+            Scoe: {props.score}
         </div>
     </div>
 );
