@@ -10,9 +10,6 @@ const greeting = (props) => (
         <div className='logo-name'>
             Mastermind
         </div>
-        <div>
-            Scoe: {props.score}
-        </div>
     </div>
 );
 

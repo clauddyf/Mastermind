@@ -226,9 +226,6 @@ class GamePlay extends React.Component {
         } else {
         return (
             <div className='papa-div'>
-                <Greeting 
-                    score= {this.state.score}
-                />
                 <div className='backgroundImg'>
                     <div className='instructions'>
                     <h1 className='headers'>Mastermind</h1>
@@ -259,16 +256,19 @@ class GamePlay extends React.Component {
                                 <h1>List of Guesses:</h1>
                                 {this.state.pastGuesses.map(guess => <li className='listGuesses'>{guess}</li>)}
                             </div>
-                            <div>
-                                Score: {this.state.score}
-                            </div>
                     </div>
                     <div className='playerGuess'>
-                    <div className='lastMove'>{this.state.lastMove}</div>
-                    <form action="" className='inputsnum'>
-                        <input className='numInput'type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')}/>
-                        <button className='checkButton'onClick={this.handleSubmit}>Check</button>
-                    </form>
+                        <div className='lastMove'>{this.state.lastMove}</div>
+                        <form action="" className='inputsnum'>
+                            <input className='numInput'type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')}/>
+                            <button className='checkButton'onClick={this.handleSubmit}>Check</button>
+                        </form>
+                    </div>
+                    <div className='scoreDiv'>
+                        Score: 
+                        <div>
+                            {this.state.score}   
+                        </div>
                     </div>
                 </div>
             </div>
