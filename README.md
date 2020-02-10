@@ -1,6 +1,6 @@
 ![](https://github.com/clauddyf/Mastermind/blob/master/public/stylesheets/Screenshot%20from%202020-02-09%2017-28-07.png)
 # Mastermind
-Mastermind is a game in which you guess a secret code consisting of a series 8 numbers.Each guest results in feedback narrowing down the possibilities of the code. The Winner is the person who guesses the secret code in less than 10 tries.
+Mastermind is a game in which you guess a secret code consisting of a series of eight numbers. Each guess results in feedback, narrowing down the possibilities of the code. You win by guessing the secret code in fewer than ten attempts.
 
 ![](https://github.com/clauddyf/Mastermind/blob/master/public/stylesheets/Screenshot%20from%202020-02-09%2018-14-06.png)
 
