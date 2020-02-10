@@ -41,12 +41,12 @@ If you do not have git and/or node.js installed, or you are unsure,please click 
 
 ## Features
 ### Backend API call
-I implemented my backend using Express. In order to use this api through two servers(frontend and backend), I had to enable cross origin reference sharing(app.use.cors()). I then had to setup a route for the random number generator backend route.
+I implemented my backend using Express. In order to use this api through two servers(frontend and backend), I had to enable cross origin reference sharing(`app.use.cors()`). I then had to setup a route for the random number generator backend route.
 
 ![](https://github.com/clauddyf/Mastermind/blob/master/public/stylesheets/Screenshot%20from%202020-02-09%2017-48-00.png) 
-In order to genarate an array of four random numbers from 0 to 7, I had to use Random.Org's api uri 'https://www.random.org/integers/?num=5&min=0&max=7&col=1&base=10&format=plain&rnd=new' with the parameters in the url being min=0&max=7(because we want numbers 0-7), and the num param equating to 5. The reasoning behind this since the api response format is in plain/html, I used .text() to take in the response and return a promise that resolves with a text object and once I had the text object, I noticed it had a length property to it, and that the integers and the line breaks had indices. I also noticed that the 0th and 1st indices were line breaks and a bracket (respectively), so I decided to push all even indices into the array. Based off the algorthm, the first random number would be excluded, so I decided to make the call for five integers.
+In order to genarate an array of four random numbers from 0 to 7, I had to use Random.Org's api uri 'https://www.random.org/integers/?num=5&min=0&max=7&col=1&base=10&format=plain&rnd=new' with the parameters in the url being `min=0&max=7`(because we want numbers 0-7), and the num param equating to 5. The reasoning behind this since the api response format is in plain/html, I used `.text()` to take in the response and return a promise that resolves with a text object and once I had the text object, I noticed it had a length property to it, and that the integers and the line breaks had indices. I also noticed that the 0th and 1st indices were line breaks and a bracket (respectively), so I decided to push all even indices into the array. Based off the algorthm, the first random number would be excluded, so I decided to make the call for five integers.
 
-I then had to make sure it is being used on the app, so I required the route in a variable (var randomRouter = require("./routes/randomGen")) and then made sure i used it on the app app.use("/randomGen", randomRouter). 
+I then had to make sure it is being used on the app, so I required the route in a variable `(var randomRouter = require("./routes/randomGen"))` and then made sure i used it on the app `app.use("/randomGen", randomRouter)`. 
 
 ![](https://github.com/clauddyf/Mastermind/blob/master/public/stylesheets/Screenshot%20from%202020-02-09%2017-45-57.png)
 
@@ -56,7 +56,7 @@ The initial state consists of the compNumArr, playerInput, try, error, status, l
 
 ![](https://github.com/clauddyf/Mastermind/blob/master/public/stylesheets/Screenshot%20from%202020-02-09%2017-49-46.png)
 
-We then fetch our backend route 'localhost:9000/randomGen' to get a response, we then format it to a javascript object(res.json()), and we grab that data, and set it to CompNumArr, and set the rest of the state, most importantly, the status to 'play'. 
+We then fetch our backend route `'localhost:9000/randomGen'`to get a response, we then format it to a javascript object(`res.json()`), and we grab that data, and set it to CompNumArr, and set the rest of the state, most importantly, the status to 'play'. 
 
 ![](https://github.com/clauddyf/Mastermind/blob/master/public/stylesheets/Screenshot%20from%202020-02-09%2017-50-51.png)
 
@@ -90,7 +90,7 @@ In the inRange function above, we return an array in which the first index is a 
 ![](https://github.com/clauddyf/Mastermind/blob/master/public/stylesheets/Screenshot%20from%202020-02-09%2017-53-24.png)
 
 ### Reset Game
-There is a conditional for a 'win', 'lose', and 'play.In case the player wanted a fresh start while playing a game, I set up a coditional that would reset to the initial state. If the player wins, we'd set everything back to its intitial state, except the score, which would be the previous state of the score, plus the score of the current game. And if the player lost, we'd also reset the state, except the lastMove.
+There is a conditional for a 'win', 'lose', and 'play.In case the player wanted a fresh start while playing a game, I set up a conditional that would reset to the initial state. If the player wins, we'd set everything back to its intitial state, except the score, which would be the previous state of the score, plus the score of the current game. And if the player lost, we'd also reset the state, except the lastMove.
 
 ![](https://github.com/clauddyf/Mastermind/blob/master/public/stylesheets/Screenshot%20from%202020-02-09%2017-50-20.png)
 
