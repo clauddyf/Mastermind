@@ -24,12 +24,10 @@ class GamePlay extends React.Component {
         this.numExactMatches = this.numExactMatches.bind(this);
         this.guess = this.guess.bind(this);
         this.scoreKeep = this.scoreKeep.bind(this)
-        debugger
     }
     
     resetGame() {
-        debugger
-        if (this.state.status !== 'fail') {
+        if (this.state.status === 'win') {
             this.setState({
                 playerInput: '',
                 try: 0,
@@ -39,8 +37,7 @@ class GamePlay extends React.Component {
                 pastGuesses: [],
                 score: this.state.score + this.scoreKeep()
             })
-        }
-        if (this.state.status === 'fail') {
+        } else if (this.state.status === 'fail') {
             this.setState({
                 playerInput: '',
                 try: 0,
@@ -50,6 +47,17 @@ class GamePlay extends React.Component {
                 pastGuesses: [],
                 score: 0
             })
+        } else {
+            this.setState({
+                compNumArr: null,
+                playerInput: '',
+                try: 0,
+                error: null,
+                status: 'play',
+                lastMove: 'Guess four numbers between 0 and 7',
+                pastGuesses: [],
+                score: 0
+        })
         }
     }
 
@@ -84,6 +92,8 @@ class GamePlay extends React.Component {
     componentDidUpdate(prevProps,prevState) {
         if (prevState.status === 'win') {
             this.getRandArr();
+        } else if (prevState.status === 'play') {
+            this.state
         }
     }
     guess(){
@@ -124,7 +134,15 @@ class GamePlay extends React.Component {
             })
         }
     }
-
+    
+    inRange(){
+        let arr = [];
+        let range = ['0','1','2','3','4','5','6','7'];
+        arr.push(this.guess().every(e => range.includes(e)))
+        arr.push(this.guess().length === 4)
+        // debugger
+        return arr
+    }
     errorHandler(){
         let fT = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === true;
         let tF = this.inRange(this.guess())[0] === true && this.inRange(this.guess())[1] === false;
@@ -133,19 +151,19 @@ class GamePlay extends React.Component {
             if (fT) {
             this.setState({
                 error: 'Error: Value Must be between 0 and 7',
-                try: this.state.try
+                try: this.state.try + 1
             });
             return;
         } else if (tF){
             this.setState({
                 error: 'Error: Whoaa there speedracer! Enter Four integers',
-                try: this.state.try 
+                try: this.state.try + 1
             });
             return;
         } else if (fF){
             this.setState({
                 error: 'Error: The instructions should be displayed above. Sorry for the incovienence, please enter four numbers between 0 and 7.',
-                try: this.state.try
+                try: this.state.try + 1
             });
             return;
         } else {
@@ -156,14 +174,6 @@ class GamePlay extends React.Component {
         }
     }
 
-    inRange(){
-        let arr = [];
-        let range = ['0','1','2','3','4','5','6','7'];
-        arr.push(this.guess().every(e => range.includes(e)))
-        arr.push(this.guess().length === 4)
-        // debugger
-        return arr
-    }
 
     guessArray(){
         debugger
@@ -268,6 +278,9 @@ class GamePlay extends React.Component {
                         Score: 
                         <div>
                             {this.state.score}   
+                        </div>
+                            <div>
+                            <button className='resetButt' onClick={this.resetGame}>Reset</button>
                         </div>
                     </div>
                 </div>
