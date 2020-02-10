@@ -17,9 +17,19 @@ Mastermind is a game in which you guess a secret code consisting of a series 8 n
 
   `git clone https://github.com/clauddyf/Mastermind.git`
   
+3. Get into project folder
+
+ `cd Mastermind`
+  
 3. Install dependencies
 
  `npm install`
+ 
+ `cd frontend`
+ 
+ `npm install`
+ 
+ `cd ..`
  
 4. Run the concurrent servers
 
