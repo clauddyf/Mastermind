@@ -105,6 +105,7 @@ There is a conditional for a 'win', 'lose', and 'play.In case the player wanted 
 * Create a database to hold the high score. The table would consist of a Name column, and a score column
 * Implement a difficulty leveler that changes the parameters of the api url in the backend
 * Allow User Authorization in order to keep history of user scores
+* Implement Test Driven Development
 * Data visualization based on the users code
 * I'd like to split the game_play file into more components
 * Create a component using hooks.
