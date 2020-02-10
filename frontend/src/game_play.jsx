@@ -99,7 +99,7 @@ class GamePlay extends React.Component {
     }
 
     numExactMatches(){
-        // debugger
+        
         let count = 0;
         for (let i = 0; i < this.guess().length; i++){
             if (this.state.compNumArr[i] === this.guess()[i]){
@@ -111,7 +111,7 @@ class GamePlay extends React.Component {
 
     matchesResponse(){
         let compNumArr = this.state.compNumArr;
-        // debugger
+        
         if (this.numExactMatches(this.guess()) === compNumArr.length) {
             this.setState({
                 status: 'win'
@@ -138,14 +138,14 @@ class GamePlay extends React.Component {
         let range = ['0','1','2','3','4','5','6','7'];
         arr.push(this.guess().every(e => range.includes(e)))
         arr.push(this.guess().length === 4)
-        // debugger
+        
         return arr
     }
     errorHandler(){
         let fT = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === true;
         let tF = this.inRange(this.guess())[0] === true && this.inRange(this.guess())[1] === false;
         let fF = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === false;
-        debugger
+        
             if (fT) {
             this.setState({
                 error: 'Error: Value Must be between 0 and 7',
@@ -174,7 +174,7 @@ class GamePlay extends React.Component {
 
 
     guessArray(){
-        debugger
+        
         let arr = this.state.pastGuesses;
         let playerInput = this.state.playerInput
         arr.push(playerInput);
@@ -183,12 +183,12 @@ class GamePlay extends React.Component {
     
     handleSubmit(e) {
         e.preventDefault();
-        // debugger
+        
         this.matchesResponse()
         this.errorHandler()
         if (this.state.status !== 'play'){
             let arr = this.state.pastGuesses;
-            debugger
+            
             arr.push(this.guess())
             return arr
         }
