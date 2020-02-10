@@ -32,7 +32,7 @@ class GamePlay extends React.Component {
                 playerInput: '',
                 try: 0,
                 error: null,
-                compNumArr: null,
+                compNumArr: this.getRandArr(),
                 status: 'play',
                 pastGuesses: [],
                 score: this.state.score + this.scoreKeep()
@@ -42,14 +42,14 @@ class GamePlay extends React.Component {
                 playerInput: '',
                 try: 0,
                 error: null,
-                compNumArr: null,
+                compNumArr: this.getRandArr(),
                 status: 'play',
                 pastGuesses: [],
                 score: 0
             })
         } else {
             this.setState({
-                compNumArr: null,
+                compNumArr: this.getRandArr(),
                 playerInput: '',
                 try: 0,
                 error: null,
@@ -174,7 +174,6 @@ class GamePlay extends React.Component {
 
 
     guessArray(){
-        
         let arr = this.state.pastGuesses;
         let playerInput = this.state.playerInput
         arr.push(playerInput);
