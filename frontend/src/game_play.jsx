@@ -92,8 +92,6 @@ class GamePlay extends React.Component {
     componentDidUpdate(prevProps,prevState) {
         if (prevState.status === 'win') {
             this.getRandArr();
-        } else if (prevState.status === 'play') {
-            this.state
         }
     }
     guess(){
