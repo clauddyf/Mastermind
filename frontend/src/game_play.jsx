@@ -1,6 +1,4 @@
 import React from 'react';
-// import inRange from './inRange';
-import Bubbles from './bubbles';
 import Greeting from './greeting';
 
 
@@ -256,9 +254,6 @@ class GamePlay extends React.Component {
                             <div className='stickyResults'>
                                 <div className='errorMessages'>{this.state.error}</div>
                             </div>
-                            {/* <Bubbles
-                                guesses = {this.state.pastGuesses}
-                            /> */}
                             <div className='guesses'>
                                 <h1>List of Guesses:</h1>
                                 {this.state.pastGuesses.map(guess => <li className='listGuesses'>{guess}</li>)}
