@@ -87,7 +87,7 @@ In the inRange function above, we return an array in which the first index is a 
 ![](https://github.com/clauddyf/Mastermind/blob/master/public/stylesheets/Screenshot%20from%202020-02-09%2017-53-24.png)
 
 ### Reset Game
-There is a conditional for a 'win', 'lose', and 'play.In case the player wanted a fresh start while playing a game, I set up a coditional that would reset to the initial state. If the player wins, we'd set everything back to its intitial state, except the score, which would be the previous state of the score, plus the score of the current game. And if the player loss, we'd also reset the state, except the lastMove.
+There is a conditional for a 'win', 'lose', and 'play.In case the player wanted a fresh start while playing a game, I set up a coditional that would reset to the initial state. If the player wins, we'd set everything back to its intitial state, except the score, which would be the previous state of the score, plus the score of the current game. And if the player lost, we'd also reset the state, except the lastMove.
 
 ![](https://github.com/clauddyf/Mastermind/blob/master/public/stylesheets/Screenshot%20from%202020-02-09%2017-50-20.png)
 
