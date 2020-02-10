@@ -14,7 +14,7 @@ If you do not have git and/or node.js installed, or you are unsure,please click 
  
  `mkdir Mastermind`
  
- `cd Matermind`
+ `cd Mastermind`
 
 2. Clone the project or download zip
 
