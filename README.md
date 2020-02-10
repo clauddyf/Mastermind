@@ -5,6 +5,9 @@ Mastermind is a game in which you guess a secret code consisting of a series of 
 ![](https://github.com/clauddyf/Mastermind/blob/master/public/stylesheets/Screenshot%20from%202020-02-09%2018-14-06.png)
 
 ## Getting Started: How to play locally
+If you do not have git and/or node.js installed, or you are unsure,please click on both links and install the git and node package
+  * Git download url: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+  * Node download url: https://nodejs.org/en/download/
 1. Create folder in Desktop
 
  `cd Desktop`
