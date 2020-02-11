@@ -21,7 +21,7 @@ class GamePlay extends React.Component {
         this.guess = this.guess.bind(this);
         this.scoreKeep = this.scoreKeep.bind(this)
     }
-    
+
 
     // The reset function sets the state based off of the status object of the state. Main differences, if you win, we increment the score. 
     resetGame() {
@@ -55,13 +55,13 @@ class GamePlay extends React.Component {
                 lastMove: 'Guess four numbers between 0 and 7',
                 pastGuesses: [],
                 score: 0
-        })
+            })
         }
     }
 
     // The way to keep score is to simply subtract 10 from the amount of attempts, and multiply it by ten
 
-    scoreKeep(){
+    scoreKeep() {
         return (10 - this.state.try) * 10
     }
 
@@ -74,44 +74,44 @@ class GamePlay extends React.Component {
 
 
     getRandArr() {
-      fetch('http://localhost:9000/randomGen')
-        .then(res => res.json())
-        .then(data => this.setState({
-            
-            compNumArr: data,
-            status:'play',
-            try: 0,
-            lastMove: 'Guess four numbers between 0 and 7',
-            error:null,
-            pastGuesses: [], 
-        }))
-        .catch(err => {
-            this.setState({status: 'fail'})
-        });
+        fetch('http://localhost:9000/randomGen')
+            .then(res => res.json())
+            .then(data => this.setState({
+
+                compNumArr: data,
+                status: 'play',
+                try: 0,
+                lastMove: 'Guess four numbers between 0 and 7',
+                error: null,
+                pastGuesses: [],
+            }))
+            .catch(err => {
+                this.setState({ status: 'fail' })
+            });
     }
     // once the component is mounted, we call our getRandArr() function
-    componentDidMount(){
+    componentDidMount() {
         this.getRandArr();
     }
 
-    componentDidUpdate(prevProps,prevState) {
+    componentDidUpdate(prevProps, prevState) {
         if (prevState.status === 'win') {
             this.getRandArr();
         }
     }
 
     // this function will take in the users string input, and turn it into an array of integer strings
-    guess(){
+    guess() {
         return this.state.playerInput.split('')
     }
 
     // this function returns a count for exact matches between the computer generated array, and the uses array. Iterates through guess,
     // and checks to see if the computer element is the same at the same index
-    numExactMatches(){
-        
+    numExactMatches() {
+
         let count = 0;
-        for (let i = 0; i < this.guess().length; i++){
-            if (this.state.compNumArr[i] === this.guess()[i]){
+        for (let i = 0; i < this.guess().length; i++) {
+            if (this.state.compNumArr[i] === this.guess()[i]) {
                 count += 1;
             }
         }
@@ -123,66 +123,65 @@ class GamePlay extends React.Component {
     // we set the status to win. If there amount of tries are equal to 9, that means they failed, in which we change
     // the status to fail, keep the past guesses, and sets the player input to an empty string
     // And the last conditional is the status still being in 'play', and displaying their lastMove
-    matchesResponse(){
+    matchesResponse() {
         let compNumArr = this.state.compNumArr;
-        
+
         if (this.numExactMatches(this.guess()) === compNumArr.length) {
             this.setState({
                 status: 'win'
             })
             return;
-        } else if (this.state.try === 9){
+        } else if (this.state.try === 9) {
             this.setState({
-                status:'fail',
+                status: 'fail',
                 pastGuesses: this.guessArray(),
-                playerInput:''
+                playerInput: ''
             })
-        } else 
-            {
+        } else {
             this.setState({
                 lastMove: `You had ${this.numExactMatches()} exact matches. You have ${9 - this.state.try} tries left`,
                 pastGuesses: this.guessArray(),
-                playerInput:''
+                playerInput: ''
             })
         }
     }
-    
+
 
     // The function below returns a two element array consisting of booleans
     // the 0th index is checking to see if every element in the players guess is in the range specified
     // the second boolean is checking to see if the user only inputs four integers
 
 
-    inRange(){
+    inRange() {
         let arr = [];
-        let range = ['0','1','2','3','4','5','6','7'];
+        let range = ['0', '1', '2', '3', '4', '5', '6', '7'];
         arr.push(this.guess().every(e => range.includes(e)))
         arr.push(this.guess().length === 4)
-        
+
         return arr
     }
 
     //The function below checks all combinations of what we could get from our inRange function
     // And with each combination, we set the error according to if they had the correct length but out of range digit,
     // And if the players guess satisfies both conditions ([true,true]), we dont return an error.
-    errorHandler(){
+    errorHandler() {
         let fT = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === true;
         let tF = this.inRange(this.guess())[0] === true && this.inRange(this.guess())[1] === false;
         let fF = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === false;
-        
-            if (fT) {
+
+        if (fT) {
             this.setState({
                 error: 'Error: Value Must be between 0 and 7',
                 try: this.state.try + 1
             });
             return;
-        } else if (tF){
+        } else if (tF) {
             this.setState({
                 error: 'Error: Whoaa there speedracer! Enter Four integers',
                 try: this.state.try + 1
             });
             return;
-        } else if (fF){
+        } else if (fF) {
             this.setState({
                 error: 'Error: The instructions should be displayed above. Sorry for the incovienence, please enter four numbers between 0 and 7.',
                 try: this.state.try + 1
@@ -198,21 +197,21 @@ class GamePlay extends React.Component {
 
     // This function pushes the users input into an array. We do not split the input string so that
     // it would render a better picture on the page
-    guessArray(){
+    guessArray() {
         let arr = this.state.pastGuesses;
         let playerInput = this.state.playerInput
         arr.push(playerInput);
         return arr
     }
-    
+
     // the handleSubmit function calls the matchesResponse and error handler functions
     // the preventDefault function prevents us from submitting a form
     handleSubmit(e) {
         e.preventDefault();
-        
+
         this.matchesResponse()
         this.errorHandler()
-        if (this.state.status !== 'play'){
+        if (this.state.status !== 'play') {
             this.guessArray()
         }
     }
@@ -223,7 +222,7 @@ class GamePlay extends React.Component {
             playerInput: e.currentTarget.value
         });
     }
-    
+
     // The render statement provides different html based on the states status. 
     // If they win, we show them the secret code and number of attemptes
     // If they lose, we show them the correct combination, and have the play again button that calls reset function
@@ -244,7 +243,7 @@ class GamePlay extends React.Component {
                     </div>
                 </div>
             )
-        } else if (this.state.status === 'fail'){
+        } else if (this.state.status === 'fail') {
             return (
                 <div className='loserdiv'>
                     <h1 className='headers' >BETTER LUCK NEXT TIME</h1>
@@ -262,28 +261,28 @@ class GamePlay extends React.Component {
                 </div>
             )
         } else {
-        return (
-            <div className='papa-div'>
-                <div className='backgroundImg'>
-                    <div className='instructions'>
-                    <h1 className='headers'>Mastermind</h1>
-                        <div>Intructions:</div>
-                        <br/>
-                        <div>
+            return (
+                <div className='papa-div'>
+                    <div className='backgroundImg'>
+                        <div className='instructions'>
+                            <h1 className='headers'>Mastermind</h1>
+                            <div>Intructions:</div>
+                            <br />
                             <div>
-                                Feel like you're getting old? Test the strength of the old noggin with Mastermind!
+                                <div>
+                                    Feel like you're getting old? Test the strength of the old noggin with Mastermind!
                             </div>
-                            <div>
-                                This is a game in which the user should guess a combination of 4 numbers, ranging from 0-7.
+                                <div>
+                                    This is a game in which the user should guess a combination of 4 numbers, ranging from 0-7.
                             </div>
-                            <div>
-                                This game will provide feedback when you get an exact number, and its position.
+                                <div>
+                                    This game will provide feedback when you get an exact number, and its position.
+                            </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className='lilpapi-div'>
-                    <div className='rightSide'>
+                    <div className='lilpapi-div'>
+                        <div className='rightSide'>
                             <div className='stickyResults'>
                                 <div className='errorMessages'>{this.state.error}</div>
                             </div>
@@ -291,27 +290,28 @@ class GamePlay extends React.Component {
                                 <h1>List of Guesses:</h1>
                                 {this.state.pastGuesses.map(guess => <li className='listGuesses'>{guess}</li>)}
                             </div>
-                    </div>
-                    <div className='playerGuess'>
-                        <div className='lastMove'>{this.state.lastMove}</div>
-                        <form action="" className='inputsnum'>
-                            <input className='numInput'type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')}/>
-                            <button className='checkButton'onClick={this.handleSubmit}>Check</button>
-                        </form>
-                    </div>
-                    <div className='scoreDiv'>
-                        Score: 
-                        <div>
-                            {this.state.score}   
                         </div>
+                        <div className='playerGuess'>
+                            <div className='lastMove'>{this.state.lastMove}</div>
+                            <form action="" className='inputsnum'>
+                                <input className='numInput' type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')} />
+                                <button className='checkButton' onClick={this.handleSubmit}>Check</button>
+                            </form>
+                        </div>
+                        <div className='scoreDiv'>
+                            Score:
+                        <div>
+                                {this.state.score}
+                            </div>
                             <div>
-                            <button className='resetButt' onClick={this.resetGame}>Reset</button>
+                                <button className='resetButt' onClick={this.resetGame}>Reset</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        )}
-    }       
+            )
+        }
+    }
 }
 
 export default GamePlay
