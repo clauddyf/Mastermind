@@ -5,7 +5,9 @@ import Play from './game_play'
 const greeting = () => (
     <div className= 'header-link'>
         <div className='logo-img'>
-            <img src="/linkedin.png" alt=""/>
+            <a href="https://www.linkedin.com/in/claudius-solomon-ba3a2494/">
+                <img src="linkedin.png"  alt=""/>
+            </a>
         </div>
         <div className='logo-name'>
             Mastermind
