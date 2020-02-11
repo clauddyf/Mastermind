@@ -198,7 +198,6 @@ class GamePlay extends React.Component {
     // This function pushes the users input into an array. We do not split the input string so that
     // it would render a better picture on the page
     guessArray() {
-        debugger
         let arr = this.state.pastGuesses;
         let playerInput = this.state.playerInput
         arr.push(playerInput);
