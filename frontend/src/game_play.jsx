@@ -8,10 +8,11 @@ class GamePlay extends React.Component {
             playerInput: '',
             try: 0,
             error: null,
-            status: 'play',
+            status: 'choose',
             lastMove: 'Guess four numbers between 0 and 7',
             pastGuesses: [],
-            score: 0
+            score: 0,
+            difficulty: ['easy','hard']
         }
         this.handleSubmit = this.handleSubmit.bind(this); // Binding functions in the constructor, so I can use them in the render function
         this.resetGame = this.resetGame.bind(this);
@@ -20,6 +21,7 @@ class GamePlay extends React.Component {
         this.numExactMatches = this.numExactMatches.bind(this);
         this.guess = this.guess.bind(this);
         this.scoreKeep = this.scoreKeep.bind(this)
+        this.setsDifficulty = this.setsDifficulty.bind(this)
     }
 
 
@@ -74,25 +76,59 @@ class GamePlay extends React.Component {
 
 
     getRandArr() {
-        fetch('http://localhost:9000/randomGen')
+        if(this.state.difficulty === this.state.difficulty[1]){
+            fetch('http://localhost:9000/randomGen')
+                .then(res => res.json())
+                .then(data => this.setState({
+    
+                    compNumArr: data,
+                    status: 'play',
+                    try: 0,
+                    lastMove: 'Guess four numbers between 0 and 7',
+                    error: null,
+                    pastGuesses: [],
+                }))
+                .catch(err => {
+                    this.setState({ status: 'fail' })
+                });
+        } else {
+            fetch('http://localhost:9000/lvTwo')
             .then(res => res.json())
             .then(data => this.setState({
 
                 compNumArr: data,
                 status: 'play',
                 try: 0,
-                lastMove: 'Guess four numbers between 0 and 7',
+                lastMove: 'Guess three numbers between 0 and 4',
                 error: null,
                 pastGuesses: [],
             }))
             .catch(err => {
                 this.setState({ status: 'fail' })
             });
+        }
     }
+
+    // getlvTwo(){
+    //     fetch('http://localhost:9000/lvTwo')
+    //         .then(res => res.json())
+    //         .then(data => this.setState({
+
+    //             compNumArr: data,
+    //             status: 'play',
+    //             try: 0,
+    //             lastMove: 'Guess three numbers between 0 and 4',
+    //             error: null,
+    //             pastGuesses: [],
+    //         }))
+    //         .catch(err => {
+    //             this.setState({ status: 'fail' })
+    //         });
+    // }
     // once the component is mounted, we call our getRandArr() function
-    componentDidMount() {
-        this.getRandArr();
-    }
+    // componentDidMount() {
+    //     this.getRandArr();
+    // }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.status === 'win') {
@@ -102,9 +138,9 @@ class GamePlay extends React.Component {
 
     // this function will take in the users string input, and turn it into an array of integer strings
     guess() {
+        debugger
         return this.state.playerInput.split('')
     }
-
     // this function returns a count for exact matches between the computer generated array, and the uses array. Iterates through guess,
     // and checks to see if the computer element is the same at the same index
     numExactMatches() {
@@ -153,12 +189,21 @@ class GamePlay extends React.Component {
 
 
     inRange() {
-        let arr = [];
-        let range = ['0', '1', '2', '3', '4', '5', '6', '7'];
-        arr.push(this.guess().every(e => range.includes(e)))
-        arr.push(this.guess().length === 4)
-
-        return arr
+        if(this.state.difficulty === this.state.difficulty[1]){
+            let arr = [];
+            let range = ['0', '1', '2', '3', '4', '5', '6', '7'];
+            arr.push(this.guess().every(e => range.includes(e)))
+            arr.push(this.guess().length === 4)
+    
+            return arr
+        } else {
+            let arr = [];
+            let range = ['0', '1', '2', '3', '4'];
+            arr.push(this.guess().every(e => range.includes(e)))
+            arr.push(this.guess().length === 3)
+    
+            return arr
+        }
     }
 
     //The function below checks all combinations of what we could get from our inRange function
@@ -219,6 +264,14 @@ class GamePlay extends React.Component {
         });
     }
 
+    setsDifficulty(e){
+        this.setState({
+            difficulty: e.target.value
+        })
+        this.getRandArr()
+
+    }
+
     // The render statement provides different html based on the states status. 
     // If they win, we show them the secret code and number of attemptes
     // If they lose, we show them the correct combination, and have the play again button that calls reset function
@@ -253,6 +306,24 @@ class GamePlay extends React.Component {
                     </div>
                     <div className='againButton'>
                         <button className='playAgain' onClick={this.resetGame}> Play again </button>
+                    </div>
+                </div>
+            )
+        } else if (this.state.status === 'choose'){
+            return(
+                <div className='chooseDiv'>
+                    <div className='lilChoose'>
+                            Please choose difficulty
+                    </div>
+                    <div className='radioDiv' >
+                        <form action="" className='selectorDiv'>
+                            <input className='inputOptionse' type="radio"  value="easy"
+                                    onChange={this.setsDifficulty}/>
+                            <label for="easy">Easy</label>
+                            <input className='inputOptions' type="radio"  value="hard"
+                                    onChange={this.setsDifficulty}/>
+                            <label for="hard">Hard</label>
+                        </form>
                     </div>
                 </div>
             )

@@ -215,3 +215,29 @@
   color: black;
   font-size: 50px;
 }
+
+.chooseDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 200px;
+}
+
+.lilChoose{
+  color: white;
+  font-size: 45px;
+  font-family: 'Roboto', sans-serif;
+    font-family: 'Russo One', sans-serif;
+}
+
+.inputOptionse{
+  color: red;
+}
+.inputOptions{
+  color: white;
+}
+
+.radioDiv{
+  font-size: 23.5px;
+  color: red;
+}

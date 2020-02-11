@@ -6,7 +6,7 @@ var logger = require('morgan'); //on any requests being made, it generates logs 
 var cors = require('cors');
 
 var randomRouter = require("./routes/randomGen");
-
+var randomRouterlvTwo = require('./routes/randomGenlvTwo')
 
 var app = express();
 
@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use("/randomGen", randomRouter);
+app.use('/lvTwo', randomRouterlvTwo)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
