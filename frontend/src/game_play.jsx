@@ -1,6 +1,4 @@
 import React from 'react';
-import Greeting from './greeting';
-
 
 class GamePlay extends React.Component {
     constructor(props) {
@@ -15,7 +13,7 @@ class GamePlay extends React.Component {
             pastGuesses: [],
             score: 0
         }
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this); // Binding functions in the constructor, so I can use them in the render function
         this.resetGame = this.resetGame.bind(this);
         this.getRandArr = this.getRandArr.bind(this);
         this.update = this.update.bind(this);
@@ -24,6 +22,8 @@ class GamePlay extends React.Component {
         this.scoreKeep = this.scoreKeep.bind(this)
     }
     
+
+    // The reset function sets the state based off of the status object of the state. Main differences, if you win, we increment the score. 
     resetGame() {
         if (this.state.status === 'win') {
             this.setState({
@@ -59,9 +59,18 @@ class GamePlay extends React.Component {
         }
     }
 
+    // The way to keep score is to simply subtract 10 from the amount of attempts, and multiply it by ten
+
     scoreKeep(){
         return (10 - this.state.try) * 10
     }
+
+    // The reason for the getRandarr() function is for us to make an external api call using our backend route
+    // The reason a backend was implemented because the api isnt cors enabled, so I had to install the cors module
+    // and use it on express, so I could call it from the frontend.
+    // When we get out response, we send a promise text object, and then we use that data to set to the compNumArr key.
+    // We also set other parameters in the state back to default, since it is being used
+    // with the resetGame function
 
 
     getRandArr() {
@@ -75,14 +84,12 @@ class GamePlay extends React.Component {
             lastMove: 'Guess four numbers between 0 and 7',
             error:null,
             pastGuesses: [], 
-            // score: this.state.score
-
         }))
         .catch(err => {
             this.setState({status: 'fail'})
         });
     }
-
+    // once the component is mounted, we call our getRandArr() function
     componentDidMount(){
         this.getRandArr();
     }
@@ -92,10 +99,14 @@ class GamePlay extends React.Component {
             this.getRandArr();
         }
     }
+
+    // this function will take in the users string input, and turn it into an array of integer strings
     guess(){
         return this.state.playerInput.split('')
     }
 
+    // this function returns a count for exact matches between the computer generated array, and the uses array. Iterates through guess,
+    // and checks to see if the computer element is the same at the same index
     numExactMatches(){
         
         let count = 0;
@@ -107,6 +118,11 @@ class GamePlay extends React.Component {
         return count;
     }
 
+    //The function below checks three conditions.
+    // If the count returned from the function above is equal to the computer array length
+    // we set the status to win. If there amount of tries are equal to 9, that means they failed, in which we change
+    // the status to fail, keep the past guesses, and sets the player input to an empty string
+    // And the last conditional is the status still being in 'play', and displaying their lastMove
     matchesResponse(){
         let compNumArr = this.state.compNumArr;
         
@@ -131,6 +147,12 @@ class GamePlay extends React.Component {
         }
     }
     
+
+    // The function below returns a two element array consisting of booleans
+    // the 0th index is checking to see if every element in the players guess is in the range specified
+    // the second boolean is checking to see if the user only inputs four integers
+
+
     inRange(){
         let arr = [];
         let range = ['0','1','2','3','4','5','6','7'];
@@ -139,6 +161,10 @@ class GamePlay extends React.Component {
         
         return arr
     }
+
+    //The function below checks all combinations of what we could get from our inRange function
+    // And with each combination, we set the error according to if they had the correct length but out of range digit,
+    // And if the players guess satisfies both conditions ([true,true]), we dont return an error.
     errorHandler(){
         let fT = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === true;
         let tF = this.inRange(this.guess())[0] === true && this.inRange(this.guess())[1] === false;
@@ -170,7 +196,8 @@ class GamePlay extends React.Component {
         }
     }
 
-
+    // This function pushes the users input into an array. We do not split the input string so that
+    // it would render a better picture on the page
     guessArray(){
         let arr = this.state.pastGuesses;
         let playerInput = this.state.playerInput
@@ -178,34 +205,40 @@ class GamePlay extends React.Component {
         return arr
     }
     
+    // the handleSubmit function calls the matchesResponse and error handler functions
+    // the preventDefault function prevents us from submitting a form
     handleSubmit(e) {
         e.preventDefault();
         
         this.matchesResponse()
         this.errorHandler()
         if (this.state.status !== 'play'){
-            let arr = this.state.pastGuesses;
-            
-            arr.push(this.guess())
-            return arr
+            this.guessArray()
         }
     }
-
+    //this update function sets the state of the player input. 
+    // it identifies the currentTarget of the event and makes the changes
     update() {
         return e => this.setState({
             playerInput: e.currentTarget.value
         });
     }
     
+    // The render statement provides different html based on the states status. 
+    // If they win, we show them the secret code and number of attemptes
+    // If they lose, we show them the correct combination, and have the play again button that calls reset function
+    // based on the states status
+    // And if the status is play, it returns the papa div
+
 
     render() {
         if (this.state.status === 'win') {
             return (
                 <div className='winnerdiv'>
                     <h1 className='headers'>WINNER WINNER!</h1>
-                    <div className='moveMessages'>Computers Guess: {this.state.compNumArr}</div>
+                    <div className='moveMessages'>Secret Code: {this.state.compNumArr}</div>
                     <div className='moveMessages'>Your Guess: {this.state.compNumArr}</div>
-                    <div className='moveMessages'>Number of tries: {this.state.try}</div>
+                    <div className='moveMessages'>Number of attempts: {this.state.try}</div>
                     <div className='againButton'>
                         <button className='checkButton' onClick={this.resetGame}>Play again</button>
                     </div>
