@@ -208,12 +208,8 @@ class GamePlay extends React.Component {
     // the preventDefault function prevents us from submitting a form
     handleSubmit(e) {
         e.preventDefault();
-
         this.matchesResponse()
         this.errorHandler()
-        if (this.state.status !== 'play') {
-            this.guessArray()
-        }
     }
     //this update function sets the state of the player input. 
     // it identifies the currentTarget of the event and makes the changes
@@ -294,7 +290,7 @@ class GamePlay extends React.Component {
                         <div className='playerGuess'>
                             <div className='lastMove'>{this.state.lastMove}</div>
                             <form action="" className='inputsnum'>
-                                <input className='numInput' type="text" placeholder='Four numbers. 0-7' onChange={this.update('playerInput')} />
+                                <input className='numInput' type="text" placeholder='Four numbers. 0-7' value={this.state.playerInput} onChange={this.update('playerInput')} />
                                 <button className='checkButton' onClick={this.handleSubmit}>Check</button>
                             </form>
                         </div>
