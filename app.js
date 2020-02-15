@@ -7,7 +7,7 @@ var cors = require('cors');
 
 var randomRouter = require("./routes/randomGen");
 var randomRouterlvTwo = require('./routes/randomGenlvTwo')
-
+var randomRouterlvOne = require('./routes/randomGenlvOne')
 var app = express();
 
 app.use(cors())
@@ -19,7 +19,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use("/randomGen", randomRouter);
-app.use('/lvTwo', randomRouterlvTwo)
+app.use('/lvTwo', randomRouterlvTwo);
+app.use('/lvOne',randomRouterlvOne)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

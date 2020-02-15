@@ -12,7 +12,7 @@ class GamePlay extends React.Component {
             lastMove: 'Guess four numbers between 0 and 7',
             pastGuesses: [],
             score: 0,
-            difficulty: ['easy','hard']
+            difficulty: ['easy', 'medium', 'hard']
         }
         this.handleSubmit = this.handleSubmit.bind(this); // Binding functions in the constructor, so I can use them in the render function
         this.resetGame = this.resetGame.bind(this);
@@ -22,6 +22,7 @@ class GamePlay extends React.Component {
         this.guess = this.guess.bind(this);
         this.scoreKeep = this.scoreKeep.bind(this)
         this.setsDifficulty = this.setsDifficulty.bind(this)
+        this.diffLevelInput = this.diffLevelInput.bind(this);
     }
 
 
@@ -75,60 +76,57 @@ class GamePlay extends React.Component {
     // with the resetGame function
 
 
-    getRandArr() {
-        if(this.state.difficulty === this.state.difficulty[1]){
+    getRandArr(diffy) {
+        debugger
+        if (diffy === this.state.difficulty[2]) {
             fetch('http://localhost:9000/randomGen')
                 .then(res => res.json())
                 .then(data => this.setState({
-    
+
                     compNumArr: data,
                     status: 'play',
                     try: 0,
                     lastMove: 'Guess four numbers between 0 and 7',
                     error: null,
                     pastGuesses: [],
+                    difficulty: diffy,
+                }))
+                .catch(err => {
+                    this.setState({ status: 'fail' })
+                });
+        } else if (diffy === this.state.difficulty[1]) {
+            fetch('http://localhost:9000/lvTwo')
+                .then(res => res.json())
+                .then(data => this.setState({
+
+                    compNumArr: data,
+                    status: 'play',
+                    try: 0,
+                    lastMove: 'Guess three numbers between 0 and 4',
+                    error: null,
+                    pastGuesses: [],
+                    difficulty: diffy,
                 }))
                 .catch(err => {
                     this.setState({ status: 'fail' })
                 });
         } else {
-            fetch('http://localhost:9000/lvTwo')
-            .then(res => res.json())
-            .then(data => this.setState({
-
-                compNumArr: data,
-                status: 'play',
-                try: 0,
-                lastMove: 'Guess three numbers between 0 and 4',
-                error: null,
-                pastGuesses: [],
-            }))
-            .catch(err => {
-                this.setState({ status: 'fail' })
-            });
+            fetch('http://localhost:9000/lvOne')
+                .then(res => res.json())
+                .then(data => this.setState({
+                    compNumArr: data,
+                    status: 'play',
+                    try: 0,
+                    lastMove: 'Guess four numbers between 0 and 2',
+                    error: null,
+                    pastGuesses: [],
+                    difficulty: diffy,
+                }))
+                .catch(err => {
+                    this.setState({ status: 'fail' })
+                });
         }
     }
-
-    // getlvTwo(){
-    //     fetch('http://localhost:9000/lvTwo')
-    //         .then(res => res.json())
-    //         .then(data => this.setState({
-
-    //             compNumArr: data,
-    //             status: 'play',
-    //             try: 0,
-    //             lastMove: 'Guess three numbers between 0 and 4',
-    //             error: null,
-    //             pastGuesses: [],
-    //         }))
-    //         .catch(err => {
-    //             this.setState({ status: 'fail' })
-    //         });
-    // }
-    // once the component is mounted, we call our getRandArr() function
-    // componentDidMount() {
-    //     this.getRandArr();
-    // }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.status === 'win') {
@@ -189,19 +187,26 @@ class GamePlay extends React.Component {
 
 
     inRange() {
-        if(this.state.difficulty === this.state.difficulty[1]){
+        if (this.state.difficulty === this.state.difficulty[3]) {
             let arr = [];
             let range = ['0', '1', '2', '3', '4', '5', '6', '7'];
             arr.push(this.guess().every(e => range.includes(e)))
             arr.push(this.guess().length === 4)
-    
+
             return arr
-        } else {
+        } else if (this.state.difficulty === this.state.difficulty[2]) {
             let arr = [];
             let range = ['0', '1', '2', '3', '4'];
             arr.push(this.guess().every(e => range.includes(e)))
             arr.push(this.guess().length === 3)
-    
+
+            return arr
+        } else {
+            let arr = [];
+            let range = ['0', '1', '2'];
+            arr.push(this.guess().every(e => range.includes(e)))
+            arr.push(this.guess().length === 4)
+
             return arr
         }
     }
@@ -213,30 +218,81 @@ class GamePlay extends React.Component {
         let fT = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === true;
         let tF = this.inRange(this.guess())[0] === true && this.inRange(this.guess())[1] === false;
         let fF = this.inRange(this.guess())[0] === false && this.inRange(this.guess())[1] === false;
-
-        if (fT) {
-            this.setState({
-                error: 'Error: Value Must be between 0 and 7',
-                try: this.state.try + 1
-            });
-            return;
-        } else if (tF) {
-            this.setState({
-                error: 'Error: Whoaa there speedracer! Enter Four integers',
-                try: this.state.try + 1
-            });
-            return;
-        } else if (fF) {
-            this.setState({
-                error: 'Error: The instructions should be displayed above. Sorry for the incovienence, please enter four numbers between 0 and 7.',
-                try: this.state.try + 1
-            });
-            return;
+        if(this.state.difficulty === 'hard'){
+            if (fT) {
+                this.setState({
+                    error: 'Error: Value Must be between 0 and 7',
+                    try: this.state.try + 1
+                });
+                return;
+            } else if (tF) {
+                this.setState({
+                    error: 'Error: Whoaa there speedracer! Enter Four integers',
+                    try: this.state.try + 1
+                });
+                return;
+            } else if (fF) {
+                this.setState({
+                    error: 'Error: The instructions should be displayed above. Sorry for the incovienence, please enter four numbers between 0 and 7.',
+                    try: this.state.try + 1
+                });
+                return;
+            } else {
+                this.setState({
+                    try: this.state.try + 1,
+                    error: null
+                })
+            }
+        } else if(this.state.difficulty === 'medium'){
+            if (fT) {
+                this.setState({
+                    error: 'Error: Value Must be between 0 and 4',
+                    try: this.state.try + 1
+                });
+                return;
+            } else if (tF) {
+                this.setState({
+                    error: 'Error: Whoaa there speedracer! Enter Four integers',
+                    try: this.state.try + 1
+                });
+                return;
+            } else if (fF) {
+                this.setState({
+                    error: 'Error: The instructions should be displayed above. Sorry for the incovienence, please enter four numbers between 0 and 4.',
+                    try: this.state.try + 1
+                });
+                return;
+            } else {
+                this.setState({
+                    try: this.state.try + 1,
+                    error: null
+                })
+            }
         } else {
-            this.setState({
-                try: this.state.try + 1,
-                error: null
-            })
+            if (fT) {
+                this.setState({
+                    error: 'Error: Value Must be between 0 and 2',
+                    try: this.state.try + 1
+                });
+                return;
+            } else if (tF) {
+                this.setState({
+                    error: 'Error: Whoaa there speedracer! Enter Four integers',
+                    try: this.state.try + 1
+                });
+                return;
+            } else if (fF) {
+                this.setState({
+                    error: 'Error: The instructions should be displayed above. Sorry for the incovienence, please enter four numbers between 0 and 2.',
+                    try: this.state.try + 1
+                });
+                return;
+            } else {
+                this.setState({
+                    try: this.state.try + 1,
+                    error: null
+                })
+            }
         }
     }
 
@@ -264,12 +320,24 @@ class GamePlay extends React.Component {
         });
     }
 
-    setsDifficulty(e){
+    setsDifficulty() {
+        debugger
         this.setState({
-            difficulty: e.target.value
+            difficulty: this.diffLevelInput()
         })
-        this.getRandArr()
+        this.getRandArr();
+    }
 
+    diffLevelInput(e) {
+        // debugger
+        let diffy;
+        for (let i = 0; i < this.state.difficulty.length; i++) {
+            if (this.state.difficulty[i] === e.target.value) {
+                diffy = e.target.value
+            }
+        }
+        debugger
+        this.getRandArr(diffy);
     }
 
     // The render statement provides different html based on the states status. 
@@ -280,6 +348,7 @@ class GamePlay extends React.Component {
 
 
     render() {
+        debugger
         if (this.state.status === 'win') {
             return (
                 <div className='winnerdiv'>
@@ -309,19 +378,22 @@ class GamePlay extends React.Component {
                     </div>
                 </div>
             )
-        } else if (this.state.status === 'choose'){
-            return(
+        } else if (this.state.status === 'choose') {
+            return (
                 <div className='chooseDiv'>
                     <div className='lilChoose'>
-                            Please choose difficulty
+                        Please choose difficulty
                     </div>
                     <div className='radioDiv' >
                         <form action="" className='selectorDiv'>
-                            <input className='inputOptionse' type="radio"  value="easy"
-                                    onChange={this.setsDifficulty}/>
+                            <input className='inputOptionse' type="radio" value="easy"
+                                onChange={this.diffLevelInput} />
                             <label for="easy">Easy</label>
-                            <input className='inputOptions' type="radio"  value="hard"
-                                    onChange={this.setsDifficulty}/>
+                            <input className='inputOptionse' type="radio" value="medium"
+                                onChange={this.diffLevelInput} />
+                            <label for="medium">Medium</label>
+                            <input className='inputOptions' type="radio" value="hard"
+                                onChange={this.diffLevelInput} />
                             <label for="hard">Hard</label>
                         </form>
                     </div>
