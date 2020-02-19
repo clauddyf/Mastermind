@@ -28,12 +28,13 @@ class GamePlay extends React.Component {
 
     // The reset function sets the state based off of the status object of the state. Main differences, if you win, we increment the score. 
     resetGame() {
+        debugger
         if (this.state.status === 'win') {
             this.setState({
                 playerInput: '',
                 try: 0,
                 error: null,
-                compNumArr: this.getRandArr(),
+                compNumArr: this.getRandArr(this.state.difficulty),
                 status: 'play',
                 pastGuesses: [],
                 score: this.state.score + this.scoreKeep()
@@ -43,7 +44,7 @@ class GamePlay extends React.Component {
                 playerInput: '',
                 try: 0,
                 error: null,
-                compNumArr: this.getRandArr(),
+                compNumArr: this.getRandArr(this.state.difficulty),
                 status: 'play',
                 pastGuesses: [],
                 score: 0
@@ -75,57 +76,96 @@ class GamePlay extends React.Component {
     // We also set other parameters in the state back to default, since it is being used
     // with the resetGame function
 
+    // resetFilter(){
+    //     let diffy;
+    //     if(this.state.status === 'win'){
+    //         diffy = this.state.difficulty;
+    //         this.getRandArr(diffy)
+    //     } else if(this.state.status === 'fail'){
+    //         fetch('http://localhost:9000/lvTwo')
+    //                 .then(res => res.json())
+    //                 .then(data => this.setState({
+    
+    //                     compNumArr: data,
+    //                     status: 'play',
+    //                     try: 0,
+    //                     lastMove: 'Guess three numbers between 0 and 4',
+    //                     error: null,
+    //                     pastGuesses: [],
+    //                     difficulty: this.state.difficulty,
+    //                 }))
+    //                 .catch(err => {
+    //                     this.setState({ status: 'fail' })
+    //                 });
+    //     } else {
+    //         fetch('http://localhost:9000/lvOne')
+    //                 .then(res => res.json())
+    //                 .then(data => this.setState({
+    //                     compNumArr: data,
+    //                     status: 'play',
+    //                     try: 0,
+    //                     lastMove: 'Guess four numbers between 0 and 2',
+    //                     error: null,
+    //                     pastGuesses: [],
+    //                     difficulty: this.state.difficulty,
+    //                 }))
+    //                 .catch(err => {
+    //                     this.setState({ status: 'fail' })
+    //                 });
+    //     }
+    // }
+
 
     getRandArr(diffy) {
         debugger
-        if (diffy === this.state.difficulty[2]) {
-            fetch('http://localhost:9000/randomGen')
-                .then(res => res.json())
-                .then(data => this.setState({
-
-                    compNumArr: data,
-                    status: 'play',
-                    try: 0,
-                    lastMove: 'Guess four numbers between 0 and 7',
-                    error: null,
-                    pastGuesses: [],
-                    difficulty: diffy,
-                }))
-                .catch(err => {
-                    this.setState({ status: 'fail' })
-                });
-        } else if (diffy === this.state.difficulty[1]) {
-            fetch('http://localhost:9000/lvTwo')
-                .then(res => res.json())
-                .then(data => this.setState({
-
-                    compNumArr: data,
-                    status: 'play',
-                    try: 0,
-                    lastMove: 'Guess three numbers between 0 and 4',
-                    error: null,
-                    pastGuesses: [],
-                    difficulty: diffy,
-                }))
-                .catch(err => {
-                    this.setState({ status: 'fail' })
-                });
-        } else {
-            fetch('http://localhost:9000/lvOne')
-                .then(res => res.json())
-                .then(data => this.setState({
-                    compNumArr: data,
-                    status: 'play',
-                    try: 0,
-                    lastMove: 'Guess four numbers between 0 and 2',
-                    error: null,
-                    pastGuesses: [],
-                    difficulty: diffy,
-                }))
-                .catch(err => {
-                    this.setState({ status: 'fail' })
-                });
-        }
+            if (diffy === this.state.difficulty[2] || diffy === 'hard') {
+                fetch('http://localhost:9000/randomGen')
+                    .then(res => res.json())
+                    .then(data => this.setState({
+    
+                        compNumArr: data,
+                        status: 'play',
+                        try: 0,
+                        lastMove: 'Guess four numbers between 0 and 7',
+                        error: null,
+                        pastGuesses: [],
+                        difficulty: diffy,
+                    }))
+                    .catch(err => {
+                        this.setState({ status: 'fail' })
+                    });
+            } else if (diffy === this.state.difficulty[1] || diffy === 'medium') {
+                fetch('http://localhost:9000/lvTwo')
+                    .then(res => res.json())
+                    .then(data => this.setState({
+    
+                        compNumArr: data,
+                        status: 'play',
+                        try: 0,
+                        lastMove: 'Guess three numbers between 0 and 4',
+                        error: null,
+                        pastGuesses: [],
+                        difficulty: diffy,
+                    }))
+                    .catch(err => {
+                        this.setState({ status: 'fail' })
+                    });
+            } else if(diffy === this.state.difficulty[0] || diffy === 'easy') {
+                fetch('http://localhost:9000/lvOne')
+                    .then(res => res.json())
+                    .then(data => this.setState({
+                        compNumArr: data,
+                        status: 'play',
+                        try: 0,
+                        lastMove: 'Guess four numbers between 0 and 2',
+                        error: null,
+                        pastGuesses: [],
+                        difficulty: diffy,
+                    }))
+                    .catch(err => {
+                        this.setState({ status: 'fail' })
+                    });
+            }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -187,14 +227,14 @@ class GamePlay extends React.Component {
 
 
     inRange() {
-        if (this.state.difficulty === this.state.difficulty[3]) {
+        if (this.state.difficulty === 'hard') {
             let arr = [];
             let range = ['0', '1', '2', '3', '4', '5', '6', '7'];
             arr.push(this.guess().every(e => range.includes(e)))
             arr.push(this.guess().length === 4)
 
             return arr
-        } else if (this.state.difficulty === this.state.difficulty[2]) {
+        } else if (this.state.difficulty === 'medium') {
             let arr = [];
             let range = ['0', '1', '2', '3', '4'];
             arr.push(this.guess().every(e => range.includes(e)))
