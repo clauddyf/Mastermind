@@ -9,7 +9,7 @@ class GamePlay extends React.Component {
             try: 0,
             error: null,
             status: 'choose',
-            lastMove: 'Guess four numbers between 0 and 7',
+            lastMove: '',
             pastGuesses: [],
             score: 0,
             difficulty: ['easy', 'medium', 'hard']
@@ -51,7 +51,7 @@ class GamePlay extends React.Component {
             })
         } else {
             this.setState({
-                compNumArr: this.getRandArr(),
+                compNumArr: this.getRandArr(this.state.difficulty),
                 playerInput: '',
                 try: 0,
                 error: null,
@@ -66,7 +66,7 @@ class GamePlay extends React.Component {
     // The way to keep score is to simply subtract 10 from the amount of attempts, and multiply it by ten
 
     scoreKeep() {
-        return (10 - this.state.try) * 10
+        return (11 - this.state.try) * 10
     }
 
     // The reason for the getRandarr() function is for us to make an external api call using our backend route
@@ -75,45 +75,6 @@ class GamePlay extends React.Component {
     // When we get out response, we send a promise text object, and then we use that data to set to the compNumArr key.
     // We also set other parameters in the state back to default, since it is being used
     // with the resetGame function
-
-    // resetFilter(){
-    //     let diffy;
-    //     if(this.state.status === 'win'){
-    //         diffy = this.state.difficulty;
-    //         this.getRandArr(diffy)
-    //     } else if(this.state.status === 'fail'){
-    //         fetch('http://localhost:9000/lvTwo')
-    //                 .then(res => res.json())
-    //                 .then(data => this.setState({
-    
-    //                     compNumArr: data,
-    //                     status: 'play',
-    //                     try: 0,
-    //                     lastMove: 'Guess three numbers between 0 and 4',
-    //                     error: null,
-    //                     pastGuesses: [],
-    //                     difficulty: this.state.difficulty,
-    //                 }))
-    //                 .catch(err => {
-    //                     this.setState({ status: 'fail' })
-    //                 });
-    //     } else {
-    //         fetch('http://localhost:9000/lvOne')
-    //                 .then(res => res.json())
-    //                 .then(data => this.setState({
-    //                     compNumArr: data,
-    //                     status: 'play',
-    //                     try: 0,
-    //                     lastMove: 'Guess four numbers between 0 and 2',
-    //                     error: null,
-    //                     pastGuesses: [],
-    //                     difficulty: this.state.difficulty,
-    //                 }))
-    //                 .catch(err => {
-    //                     this.setState({ status: 'fail' })
-    //                 });
-    //     }
-    // }
 
 
     getRandArr(diffy) {
@@ -168,9 +129,9 @@ class GamePlay extends React.Component {
             }
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentWillUpdate(prevProps, prevState) {
         if (prevState.status === 'win') {
-            this.getRandArr();
+            this.getRandArr(this.state.difficulty);
         }
     }
 
