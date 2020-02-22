@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from './modal'
 
 class GamePlay extends React.Component {
     constructor(props) {
@@ -12,7 +13,8 @@ class GamePlay extends React.Component {
             lastMove: '',
             pastGuesses: [],
             score: 0,
-            difficulty: ['easy', 'medium', 'hard']
+            difficulty: ['easy', 'medium', 'hard'],
+            show: false
         }
         this.handleSubmit = this.handleSubmit.bind(this); // Binding functions in the constructor, so I can use them in the render function
         this.resetGame = this.resetGame.bind(this);
@@ -23,6 +25,20 @@ class GamePlay extends React.Component {
         this.scoreKeep = this.scoreKeep.bind(this)
         this.setsDifficulty = this.setsDifficulty.bind(this)
         this.diffLevelInput = this.diffLevelInput.bind(this);
+        this.showModal = this.showModal.bind(this);
+        this.closeModal = this.closeModal.bind(this)
+    }
+
+    showModal(){
+        this.setState({
+            show: true
+        })
+    }
+
+    closeModal(){
+        this.setState({
+            show: false
+        })
     }
 
 
@@ -382,6 +398,10 @@ class GamePlay extends React.Component {
         } else if (this.state.status === 'choose') {
             return (
                 <div className='chooseDiv'>
+                    <Modal show = {this.state.show} handleClose={this.closeModal}/>
+                    <button type='button' onClick={this.showModal}>
+                        Instructions
+                    </button>
                     <div className='lilChoose'>
                         Please choose difficulty
                     </div>

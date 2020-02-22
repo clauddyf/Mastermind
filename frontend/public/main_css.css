@@ -1,6 +1,7 @@
 @import 'footer.css';
 @import 'nav.css';
 @import 'backgroundimg.css';
+@import 'modal.css';
 
 .app-container{
   background-color: #0e76a8;
