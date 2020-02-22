@@ -200,7 +200,7 @@ class GamePlay extends React.Component {
             })
         } else {
             this.setState({
-                lastMove: `You had ${this.numExactMatches()} exact matches at positions ${this.arrExactPosition()}. You have ${9 - this.state.try} tries left`,
+                lastMove: `You had ${this.numExactMatches()} exact matche(s) at position(s) ${this.arrExactPosition()}. You have ${9 - this.state.try} tries left`,
                 pastGuesses: this.guessArray(),
                 playerInput: ''
             })
