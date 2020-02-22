@@ -43,6 +43,12 @@
     padding: 12px 16px;
 }
 
+.close-x button{
+    background: cornflowerblue;
+    border: none;
+    font-size: 19px;
+}
+
 .modalButton{
     border-style: solid;
     border-width: 0;

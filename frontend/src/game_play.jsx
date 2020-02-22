@@ -431,13 +431,13 @@ class GamePlay extends React.Component {
                             <div>
                                 <div>
                                     Feel like you're getting old? Test the strength of the old noggin with Mastermind!
-                            </div>
+                                </div>
                                 <div>
-                                    This is a game in which the user should guess a combination of 4 numbers, ranging from 0-7.
-                            </div>
+                                    This is a game in which the user should guess the randomly generated code.
+                                </div>
                                 <div>
                                     This game will provide feedback when you get an exact number, and its position.
-                            </div>
+                                </div>
                             </div>
                         </div>
                     </div>
