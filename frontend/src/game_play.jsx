@@ -169,6 +169,16 @@ class GamePlay extends React.Component {
         return count;
     }
 
+    arrExactPosition(){
+        let arr = [];
+        for (let i = 0; i < this.guess().length; i++) {
+            if (this.state.compNumArr[i] === this.guess()[i]) {
+                arr.push(i);
+            }
+        }
+        return arr.map(e => e + 1).join('');
+    }
+
     //The function below checks three conditions.
     // If the count returned from the function above is equal to the computer array length
     // we set the status to win. If there amount of tries are equal to 9, that means they failed, in which we change
@@ -190,7 +200,7 @@ class GamePlay extends React.Component {
             })
         } else {
             this.setState({
-                lastMove: `You had ${this.numExactMatches()} exact matches. You have ${9 - this.state.try} tries left`,
+                lastMove: `You had ${this.numExactMatches()} exact matches at positions ${this.arrExactPosition()}. You have ${9 - this.state.try} tries left`,
                 pastGuesses: this.guessArray(),
                 playerInput: ''
             })
