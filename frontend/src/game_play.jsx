@@ -145,15 +145,15 @@ class GamePlay extends React.Component {
             }
     }
 
-    componentWillUpdate(prevProps, prevState) {
-        if (prevState.status === 'win') {
-            this.getRandArr(this.state.difficulty);
-        }
-    }
+    // componentWillUpdate(prevProps, prevState) {
+    //     if (prevState.status === 'win') {
+    //         this.getRandArr(this.state.difficulty);
+    //     }
+    // }
 
     // this function will take in the users string input, and turn it into an array of integer strings
     guess() {
-        debugger
+        // debugger
         return this.state.playerInput.split('')
     }
     // this function returns a count for exact matches between the computer generated array, and the uses array. Iterates through guess,
@@ -398,10 +398,10 @@ class GamePlay extends React.Component {
         } else if (this.state.status === 'choose') {
             return (
                 <div className='chooseDiv'>
-                    <Modal show = {this.state.show} handleClose={this.closeModal}/>
+                    {/* <Modal show = {this.state.show} handleClose={this.closeModal}/>
                     <button type='button' className='modalButton'onClick={this.showModal}>
                         Instructions
-                    </button>
+                    </button> */}
                     <div className='lilChoose'>
                         Please choose difficulty
                     </div>

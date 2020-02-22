@@ -10,7 +10,7 @@ const Modal = ({handleClose,show}) => {
                     <h2>Instructions</h2>
                     <ul>
                         Feel like you're getting old? Test the strength of the old noggin with Mastermind!
-                        This is a game in which the user has 10 attempts to guess a randomly generated combination of 4 numbers.
+                        This is a game in which the user has 10 attempts to guess a randomly generated combination 3 to 4 numbers.
                     </ul>
                     <div>
                     </div>
