@@ -399,7 +399,7 @@ class GamePlay extends React.Component {
             return (
                 <div className='chooseDiv'>
                     <Modal show = {this.state.show} handleClose={this.closeModal}/>
-                    <button type='button' onClick={this.showModal}>
+                    <button type='button' className='modalButton'onClick={this.showModal}>
                         Instructions
                     </button>
                     <div className='lilChoose'>
