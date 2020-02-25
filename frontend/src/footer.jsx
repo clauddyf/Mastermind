@@ -41,7 +41,7 @@ const Footer = () => (
         </div>
 
         <div className='about-me'>
-            <h2>This is a LinkedIn Reach Project</h2>
+            <h2>Contact Info:</h2>
             <div className='contact-me'>
                 <a href="https://www.linkedin.com/in/claudius-solomon-ba3a2494/">
                     <img src="linkedin.png" className='contact-img' alt=""/>

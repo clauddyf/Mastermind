@@ -25,20 +25,6 @@ class GamePlay extends React.Component {
         this.scoreKeep = this.scoreKeep.bind(this)
         this.setsDifficulty = this.setsDifficulty.bind(this)
         this.diffLevelInput = this.diffLevelInput.bind(this);
-        this.showModal = this.showModal.bind(this);
-        this.closeModal = this.closeModal.bind(this)
-    }
-
-    showModal(){
-        this.setState({
-            show: true
-        })
-    }
-
-    closeModal(){
-        this.setState({
-            show: false
-        })
     }
 
 
