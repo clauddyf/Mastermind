@@ -1,5 +1,4 @@
 import React from 'react';
-import Modal from './modal'
 
 class GamePlay extends React.Component {
     constructor(props) {
@@ -184,6 +183,12 @@ class GamePlay extends React.Component {
                 pastGuesses: this.guessArray(),
                 playerInput: ''
             })
+        } else if (this.state.difficulty === 'easy' || this.state.difficulty === 'medium') {
+            this.setState({
+                lastMove: `You had ${this.numExactMatches()} exact matche(s). You have ${9 - this.state.try} tries left`,
+                pastGuesses: this.guessArray(),
+                playerInput: ''
+            })
         } else {
             this.setState({
                 lastMove: `You had ${this.numExactMatches()} exact matche(s) at position(s) ${this.arrExactPosition()}. You have ${9 - this.state.try} tries left`,
@@ -191,6 +196,7 @@ class GamePlay extends React.Component {
                 playerInput: ''
             })
         }
+
     }
 
 
