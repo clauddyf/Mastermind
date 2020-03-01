@@ -104,7 +104,7 @@ class GamePlay extends React.Component {
                         compNumArr: data,
                         status: 'play',
                         try: 0,
-                        lastMove: 'Guess three numbers between 0 and 4',
+                        lastMove: 'Guess four numbers between 0 and 4',
                         error: null,
                         pastGuesses: [],
                         difficulty: diffy,
@@ -217,7 +217,7 @@ class GamePlay extends React.Component {
             let arr = [];
             let range = ['0', '1', '2', '3', '4'];
             arr.push(this.guess().every(e => range.includes(e)))
-            arr.push(this.guess().length === 3)
+            arr.push(this.guess().length === 4)
 
             return arr
         } else {
@@ -456,7 +456,7 @@ class GamePlay extends React.Component {
                         <div className='playerGuess'>
                             <div className='lastMove'>{this.state.lastMove}</div>
                             <form action="" className='inputsnum'>
-                                <input className='numInput' type="text" placeholder='Four numbers. 0-7' value={this.state.playerInput} onChange={this.update('playerInput')} />
+                                <input className='numInput' type="text" placeholder='Type guess here' value={this.state.playerInput} onChange={this.update('playerInput')} />
                                 <button className='checkButton' onClick={this.handleSubmit}>Check</button>
                             </form>
                         </div>

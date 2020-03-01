@@ -9,8 +9,8 @@ const Modal = ({handleClose,show}) => {
                 <div className='chooseInstructions'>
                     <h2>Instructions</h2>
                     <ul>
-                        Feel like you're getting old? Test the strength of the old noggin with Mastermind!
-                        This is a game in which the user has 10 attempts to guess a randomly generated combination 3 to 4 numbers.
+                        Feel like you're getting old? Test the strength of the good ole noggin with Mastermind!
+                        This is a game in which the user has 10 attempts to guess a randomly generated combination of 3 to 4 numbers.
                     </ul>
                     <div>
                     </div>
@@ -21,7 +21,7 @@ const Modal = ({handleClose,show}) => {
                         Easy: Choose four numbers between 0 and 2
                     </div>
                     <div>
-                        Medium: Choose three numbers between 0 and 4
+                        Medium: Choose four numbers between 0 and 4
                     </div>
                     <div>
                         Hard: Choose four numbers between 0 and 7
