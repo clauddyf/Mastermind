@@ -138,7 +138,7 @@ class GamePlay extends React.Component {
         arr.push(this.guess().length === 4)
         // debugger
         return arr
-    }
+    }˜
 
     guessArray(){
         debugger
