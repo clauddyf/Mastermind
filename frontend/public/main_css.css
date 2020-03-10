@@ -1,5 +1,244 @@
+@import 'footer.css';
+@import 'nav.css';
+@import 'backgroundimg.css';
+@import 'modal.css';
+
+.app-container{
+  background-color: #0e76a8;
+}
+
 .guesses{
   display: flex;
   flex-direction: column;
-  /* justify-content: baseline; */
+}
+
+.guesses h1 {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Russo One', sans-serif;
+  font-size: 25px;
+}
+
+.checkButton{
+  padding: 0px 15px;
+  height: 40px;
+  background-color: black;
+  border: 0px;
+  color: white;
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Russo One', sans-serif;
+  cursor: pointer;
+}
+
+.resetButt{
+  padding: 0px 15px;
+  height: 40px;
+  background-color:red;
+  border: 0px;
+  color: white;
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Russo One', sans-serif;
+  cursor: pointer;
+}
+
+
+.papa-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height:706px;
+}
+
+.headers{
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+.moveMessages{
+  color:white;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Russo One', sans-serif;
+  font-size: 50px;
+}
+.lastMove{
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  padding-bottom: 50px;
+}
+
+.loserdiv{
+  height: 385px;
+  display: flex;
+  flex-direction: column;
+}
+
+.loserMessage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color:red;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Russo One', sans-serif;
+  font-size: 50px;
+  padding-top: 100px
+}
+
+.errorMessages{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color:red;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Russo One', sans-serif;
+}
+
+.numInput{
+  border: 12px;
+  border-radius: 15px;
+  height: 30px;
+  text-align: center
+}
+
+.inputsnum{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.listGuesses{
+  color:white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Russo One', sans-serif;
+}
+
+.playerGuess{
+  display: flex;
+  flex-direction: column;
+  align-items: center;margin-bottom: 15px;
+  border: 1px solid white;
+  padding: 25px;
+  border-radius: 8px;
+  width: 500px;
+  margin-top: 50px;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Russo One', sans-serif;
+}
+
+
+.stickyResults{
+  position: sticky;
+  top: 0%;
+  border-radius: 3px;
+  box-sizing: border-box;
+  margin: 1px;
+  padding: 1.0rem 1.0rem;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  background-color: white;
+}
+
+.playAgain{
+  padding: 0px 15px;
+    height: 40px;
+    background-color: black;
+    border: 0px;
+    color: white;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Russo One', sans-serif;
+    cursor: pointer;
+}
+
+.againButton{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.winnerdiv{
+  display: flex;
+  flex-direction: column; 
+  height: 385px;
+}
+
+.winnerdiv h1{
+  padding-bottom: 45px;
+}
+
+.lilpapi-div{
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  flex-direction: row-reverse;
+  max-width: 992px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 87px;
+}
+.rightSide{
+  width: 320px;
+  margin: 0 0 0 7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; display: block;
+  border: 1px solid white;
+  border-radius: 8px;
+  margin-top: 50px;
+  margin-bottom: 15px;
+}
+
+.scoreDiv{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+    border: 1px solid white;
+    padding: 25px;
+    border-radius: 8px;
+    width: 100px;
+    margin-top: 50px;
+    color: white;
+    margin-right: 6rem;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Russo One', sans-serif;
+}
+.scoreDiv div {
+  color: black;
+  font-size: 50px;
+}
+
+.chooseDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 200px;
+}
+
+.lilChoose{
+  color: white;
+  font-size: 45px;
+  font-family: 'Roboto', sans-serif;
+    font-family: 'Russo One', sans-serif;
+}
+
+.inputOptionse{
+  color: red;
+}
+.inputOptions{
+  color: white;
+}
+
+.radioDiv{
+  font-size: 23.5px;
+  color: red;
 }

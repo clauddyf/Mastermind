@@ -1,0 +1,19 @@
+.instructions{
+    color:white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Russo One', sans-serif;
+}
+
+.backgroundImg{
+    background-color: grey;
+    width: 100%;
+    height: 320px;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(/holding_lights.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+

@@ -1,17 +1,12 @@
 import React from 'react';
-// import ReactDom from 'react-dom';
-// import Root from './components/root';
-// import configureStore from './store/store';
 import {render} from 'react-dom'
 import {BrowserRouter} from 'react-router-dom';
 import App from './app'
 
-// document.addEventListener('DomContentLoaded',() => {
-//      let store;
-//      store = configureStore({})
-//      const root = document.getElementById('root');
-//      ReactDom.render(<Root store={store}/>, root);
-// })
+
+// We render the App file using Browser ROuter from the react-router-dom module
+// We append it to the main html file with the id 'root
+
 
 render((
      <BrowserRouter>

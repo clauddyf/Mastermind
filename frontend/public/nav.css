@@ -1,0 +1,68 @@
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 18px;
+    padding-right: 50px;
+    padding-bottom: 8px;
+   align-items: center;
+   height: 50px;
+ }
+
+ .header-link{
+   font-family: 'Playfair Display', serif;
+    position: relative;
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+.logo-img{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 0px;
+  height: 50px;
+  font-size: 25px;
+}
+
+.logo-img img {
+  height: 43px;
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-left: 4px;
+}
+.logo-name{
+  border:0px;
+  font-size: 25px;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Russo One', sans-serif;
+}
+
+.greetingButton{
+  border-style: solid;
+    border-width: 0;
+    cursor: pointer;
+    font-weight: 400;
+    font-family: 'Overpass', sans-serif;
+    line-height: normal;
+    margin-top: 15px;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    outline: 0;
+    border-radius: 3px;
+    display: inline-block;
+    background-color: #da3743;
+    border: solid black;
+    color: #fff;
+    padding: .875rem 1.75rem .9375rem;
+    font-family: 'Russo One', sans-serif;
+}

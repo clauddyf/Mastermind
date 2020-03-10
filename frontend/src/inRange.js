@@ -1,33 +1,33 @@
-import React from 'react'
+import React from 'react';
 
-class inRange extends React.Component {
-    constructor(props){
-        super(props);
-        this.fT = this.fT.bind(this);
-    }
-    inArr(playerInput){
-        let arr = [];
-        playerInput = this.state.playerInput;
-        let guess = playerInput.split('');
-        let range = ['0','1','2','3','4','5','6','7'];
-        arr.push(guess.every(e => range.includes(e)))
-        arr.push(guess.length === 4)
-        debugger
-        return arr
-    }
-    
-    fT(playerInput){
-        debugger
-        this.inRange(playerInput)[0] === false && this.inRange(playerInput)[1] === true 
+const inRange = ({playerInput,difficulty,guess})
+    guess() {
+        // debugger
+        return this.state.playerInput.split('')
     }
 
-    tF(playerInput){
-        this.inRange(playerInput)[0] === true && this.inRange(playerInput)[1] === false
-    }
+    inRange() {
+        if (this.state.difficulty === 'hard') {
+            let arr = [];
+            let range = ['0', '1', '2', '3', '4', '5', '6', '7'];
+            arr.push(this.guess().every(e => range.includes(e)))
+            arr.push(this.guess().length === 4)
 
-    fF(playerInput){
-        (this.inRange(playerInput)[0] === false && this.inRange(playerInput)[1] === false)
+            return arr
+        } else if (this.state.difficulty === 'medium') {
+            let arr = [];
+            let range = ['0', '1', '2', '3', '4'];
+            arr.push(this.guess().every(e => range.includes(e)))
+            arr.push(this.guess().length === 4)
+
+            return arr
+        } else {
+            let arr = [];
+            let range = ['0', '1', '2'];
+            arr.push(this.guess().every(e => range.includes(e)))
+            arr.push(this.guess().length === 4)
+
+            return arr
+        }
     }
 }
-
-export default inRange
