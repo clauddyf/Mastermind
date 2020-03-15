@@ -161,7 +161,11 @@ class GamePlay extends React.Component {
                 arr.push(i);
             }
         }
-        return arr.map(e => e + 1).join('');
+        if (arr.length > 1){
+            return arr.map(e => (e + 1)).join(',');
+        } else {
+            return arr.map(e => e + 1).join('')
+        }
     }
 
     //The function below checks three conditions.
