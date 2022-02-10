@@ -23,7 +23,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
     "node-fetch": "^2.6.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "react-router-dom": "^5.1.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
